@@ -3,6 +3,7 @@ import 'package:pool_your_car/screens/%20notifications/notification_screen.dart'
 import 'package:pool_your_car/screens/cart/cart_screen.dart';
 import 'package:pool_your_car/screens/complete_profile/complete_profile_screen.dart';
 import 'package:pool_your_car/screens/details/details_screen.dart';
+import 'package:pool_your_car/screens/forgot_password/components/resetpassword_screen.dart';
 import 'package:pool_your_car/screens/forgot_password/forgot_password_screen.dart';
 import 'package:pool_your_car/screens/help_center/help_center_screen.dart';
 import 'package:pool_your_car/screens/home/home_screen.dart';
@@ -36,10 +37,13 @@ final Map<String, WidgetBuilder> routes = {
   SearchRideScreen.routeName: (context) => SearchRideScreen(),
   InboxScreen.routeName: (context) => InboxScreen(),
   NotificationsScreen.routeName: (context) => NotificationsScreen(),
+
   //RemainingBodyOne.routeName: (context) => RemainingBodyOne(),
   //RemainingBodySecond.routeName: (context) => RemainingBodySecond(),
   //ProfileDetailsScreen.routeName:(context)=> ProfileDetailsScreen(),
   //SearchedRideResult.routeName:(context)=> SearchedRideResult(),
 
   HelpCenterScreen.routeName: (context) => HelpCenterScreen(),
+  // ignore: missing_required_param
+  //  ResetPasswordScreen.routeName: (context) => ResetPasswordScreen(email: ,),
 };

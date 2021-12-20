@@ -4,7 +4,6 @@ import 'package:pool_your_car/enums.dart';
 import 'components/body.dart';
 import '../../constants.dart';
 
-
 //const kGoogleApiKey = "AIzaSyDkYPrBWAp4X2newWTdFEaKc4clrawnvgU";
 
 class OfferRideScreen extends StatelessWidget {
@@ -17,6 +16,9 @@ class OfferRideScreen extends StatelessWidget {
         title: Text("Offer Ride"),
       ),
       body: Body(),
+      bottomNavigationBar: CustomBottomNavBar(
+        selectedMenu: MenuState.offerride,
+      ),
     );
   }
 }

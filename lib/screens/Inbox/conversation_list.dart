@@ -119,15 +119,15 @@ class _ConversationListState extends State<ConversationList> {
                 ],
               ),
             ),
-            Text(
-              "widget.time",
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 12,
-                  fontWeight: widget.isMessageRead
-                      ? FontWeight.w700
-                      : FontWeight.normal),
-            ),
+            // Text(
+            //   "widget.time",
+            //   style: TextStyle(
+            //       color: Colors.black,
+            //       fontSize: 12,
+            //       fontWeight: widget.isMessageRead
+            //           ? FontWeight.w700
+            //           : FontWeight.normal),
+            // ),
           ],
         ),
       ),

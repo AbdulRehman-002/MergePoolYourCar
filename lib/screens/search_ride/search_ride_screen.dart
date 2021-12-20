@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pool_your_car/components/coustom_bottom_nav_bar.dart';
+import '../../enums.dart';
 import 'components/body.dart';
 import '../../constants.dart';
 
@@ -15,6 +17,8 @@ class SearchRideScreen extends StatelessWidget {
         ),
       ),
       body: Body(),
+      bottomNavigationBar:
+          CustomBottomNavBar(selectedMenu: MenuState.searchride),
     );
   }
 }

@@ -30,7 +30,8 @@ class Body extends StatelessWidget {
           child: DefaultButton(
             text: "Next",
             press: () {
-              Navigator.pushNamed(context, HomeScreen.routeName);
+              //Navigator.pushNamed(context, HomeScreen.routeName);
+              Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
             },
           ),
         ),

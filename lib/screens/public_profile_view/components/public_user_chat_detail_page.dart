@@ -40,32 +40,32 @@ class _PublicUserChatDetailPageState extends State<PublicUserChatDetailPage> {
     connectToServer();
   }
 
-  Future<CreateConversationResponseModel> createConversation(
-      String firstUserId, String secondUserId, String message) async {
-    var headers = {'Content-Type': 'application/json'};
-    var request = http.Request(
-        'POST', Uri.parse('$http_ip/api/conversation/createconversation'));
-    request.body = json.encode({
-      "firstUserId": firstUserId,
-      "secondUserId": secondUserId,
-      "message": [
-        {
-          "senderId": firstUserId,
-          "text": message,
-          "timestamp": DateTime.now().millisecondsSinceEpoch,
-        }
-      ]
-    });
-    request.headers.addAll(headers);
+  // Future<CreateConversationResponseModel> createConversation(
+  //     String firstUserId, String secondUserId, String message) async {
+  //   var headers = {'Content-Type': 'application/json'};
+  //   var request = http.Request(
+  //       'POST', Uri.parse('$http_ip/api/conversation/createconversation'));
+  //   request.body = json.encode({
+  //     "firstUserId": firstUserId,
+  //     "secondUserId": secondUserId,
+  //     "message": [
+  //       {
+  //         "senderId": firstUserId,
+  //         "text": message,
+  //         "timestamp": DateTime.now().millisecondsSinceEpoch,
+  //       }
+  //     ]
+  //   });
+  //   request.headers.addAll(headers);
 
-    http.StreamedResponse response = await request.send();
+  //   http.StreamedResponse response = await request.send();
 
-    if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
-    } else {
-      print(response.reasonPhrase);
-    }
-  }
+  //   if (response.statusCode == 200) {
+  //     print(await response.stream.bytesToString());
+  //   } else {
+  //     print(response.reasonPhrase);
+  //   }
+  // }
 
   Future<SendMessageInConversationResponseModel> sendMessageToExistingConvo(
       String message) async {
@@ -186,11 +186,12 @@ class _PublicUserChatDetailPageState extends State<PublicUserChatDetailPage> {
   @override
   void initState() {
     super.initState();
-    callsharedpreffunction();
+
     setState(() {
       this.conversationId = widget.conversationMap['_id'];
-      this.secondUserId = widget.conversationMap['_id'];
+      this.secondUserId = widget.userMap['_id'];
     });
+    callsharedpreffunction();
     // connectToServer();
   }
 

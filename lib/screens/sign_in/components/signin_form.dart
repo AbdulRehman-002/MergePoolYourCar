@@ -99,6 +99,7 @@ class _SignFormState extends State<SignForm> {
             buildPasswordFormField(),
             SizedBox(height: getProportionateScreenHeight(30)),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 // Checkbox(
                 //   value: remember,
@@ -154,9 +155,9 @@ class _SignFormState extends State<SignForm> {
                         Theme.of(context).copyWith(accentColor: Colors.green),
                     overlayColor: Color(0x99E8EAF6),
                   );
-                  await Future.delayed(Duration(seconds: 3), () {
-                    Loader.hide();
-                  });
+                  // await Future.delayed(Duration(seconds: 3), () {
+                  //   Loader.hide();
+                  // });
 
                   // ignore: missing_return
                   Future<SiginResponseModel> login(
@@ -172,7 +173,7 @@ class _SignFormState extends State<SignForm> {
                         headers: {"Content-Type": "application/json"},
                         body: body);
                     print("starting loader");
-
+                    Loader.hide();
                     if (response.statusCode == 200) {
                       setState(() {
                         check = true;

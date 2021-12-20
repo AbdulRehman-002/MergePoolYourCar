@@ -165,7 +165,7 @@ class _BodyState extends State<Body> {
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: kPrimaryColor),
-        //title: Text("Ride Plan"),
+        title: Text("Wallet"),
       ),
       resizeToAvoidBottomInset: true,
       body: Padding(

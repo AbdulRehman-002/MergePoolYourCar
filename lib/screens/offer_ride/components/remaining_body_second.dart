@@ -118,6 +118,15 @@ class _RemainingBodySecondState extends State<RemainingBodySecond> {
     String rideType,
     String sharedprefenrenceid,
   ) async {
+    Loader.show(context,
+        isAppbarOverlay: true,
+        isBottomBarOverlay: true,
+        progressIndicator: CircularProgressIndicator(
+          color: kPrimaryColor,
+        ),
+        themeData: Theme.of(context).copyWith(accentColor: Colors.green),
+        overlayColor: Color(0x99E8EAF6));
+
     final String apiUrl = "$http_ip/api/ride/add";
     var body = jsonEncode({
       "pickuplocation": pickuplocation,
@@ -140,10 +149,13 @@ class _RemainingBodySecondState extends State<RemainingBodySecond> {
       "discount": discount,
       "driverId": sharedprefenrenceid
     });
-    final response = await http.post(Uri.parse(apiUrl),
-        headers: {"Content-Type": "application/json"}, body: body);
-    print("starting loader");
-
+    final response = await http.post(
+      Uri.parse(apiUrl),
+      headers: {"Content-Type": "application/json"},
+      body: body,
+    );
+    print("ending loader");
+    Loader.hide();
     if (response.statusCode == 200) {
       print(response.body.toString());
       final String responseString = response.body;
@@ -155,7 +167,7 @@ class _RemainingBodySecondState extends State<RemainingBodySecond> {
         textColor: Colors.white,
         fontSize: 20.0,
       );
-      Navigator.pushNamed(context, HomeScreen.routeName);
+      Navigator.popUntil(context, ModalRoute.withName(HomeScreen.routeName));
 
       return addRideResponseModelFromJson(responseString);
     } else {
@@ -401,18 +413,6 @@ class _RemainingBodySecondState extends State<RemainingBodySecond> {
                         print("Optional Details ");
                         print(widget.optional_details);
                       }
-                      Loader.show(context,
-                          isAppbarOverlay: true,
-                          isBottomBarOverlay: true,
-                          progressIndicator: CircularProgressIndicator(
-                            color: kPrimaryColor,
-                          ),
-                          themeData: Theme.of(context)
-                              .copyWith(accentColor: Colors.green),
-                          overlayColor: Color(0x99E8EAF6));
-                      await Future.delayed(Duration(seconds: 3), () {
-                        Loader.hide();
-                      });
 
                       await createRide(
                           widget.pickuplocation,

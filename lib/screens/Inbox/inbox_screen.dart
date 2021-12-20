@@ -4,11 +4,10 @@ import 'package:pool_your_car/enums.dart';
 import 'body.dart';
 import '../../constants.dart';
 
-
 class InboxScreen extends StatelessWidget {
   const InboxScreen({Key key}) : super(key: key);
 
-static String routeName = "/inbox";
+  static String routeName = "/inbox";
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +19,9 @@ static String routeName = "/inbox";
         ),
       ),
       body: Body(),
+      bottomNavigationBar: CustomBottomNavBar(
+        selectedMenu: MenuState.inbox,
+      ),
     );
   }
 }

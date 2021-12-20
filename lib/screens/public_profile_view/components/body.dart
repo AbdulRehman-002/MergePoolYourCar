@@ -68,10 +68,14 @@ class _BodyState extends State<Body> {
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
-      var res = await response.stream.bytesToString();
+      //var res = await response.stream.bytesToString();
+      var _response = await http.Response.fromStream(response);
+      Map<String, dynamic> convo = jsonDecode(_response.body);
       setState(() {
-        convoMap = jsonDecode(res);
+        convoMap = convo['conversation'];
       });
+      print('printing convo map in create convo funciton');
+      print(convoMap);
       //print(await response.stream.bytesToString());
     } else {
       print(response.reasonPhrase);
@@ -79,6 +83,8 @@ class _BodyState extends State<Body> {
   }
 
   Future checkConversationExists() async {
+    print('my id ' + this.sharedprefenrenceid);
+    print('second user id ' + widget.userid);
     var res;
     String url =
         '$http_ip/api/conversation/searchconversationexists/${this.sharedprefenrenceid}/${widget.userid}';
@@ -105,11 +111,13 @@ class _BodyState extends State<Body> {
               ),
             ));
       } else {
-        // print("convo found");
+        print("convo found");
+        Map<String, dynamic> getconvoinres = jsonDecode(res);
         setState(() {
-          convoMap = jsonDecode(res);
+          convoMap = getconvoinres['conversation'];
         });
-        // print(convoMap);
+
+        print(convoMap);
         Navigator.push(
             context,
             MaterialPageRoute(
