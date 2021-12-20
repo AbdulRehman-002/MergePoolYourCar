@@ -53,10 +53,9 @@ class _ConversationListState extends State<ConversationList> {
           MaterialPageRoute(
             builder: (context) {
               return ChatDetailPage(
-                conversationId: widget.conversationId,
-                seconduserMap: widget.otherUserMap,
-                conversationList: this.widget.messageList,
-              );
+                  conversationId: widget.conversationId,
+                  seconduserMap: widget.otherUserMap,
+                  conversationList: this.widget.messageList);
             },
           ),
         ).then((_) => {widget.getConversations()});

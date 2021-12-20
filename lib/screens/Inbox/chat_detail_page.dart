@@ -47,32 +47,32 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
     connectToServer();
   }
 
-  Future<CreateConversationResponseModel> createConversation(
-      String firstUserId, String secondUserId, String message) async {
-    var headers = {'Content-Type': 'application/json'};
-    var request = http.Request(
-        'POST', Uri.parse('$http_ip/api/conversation/createconversation'));
-    request.body = json.encode({
-      "firstUserId": firstUserId,
-      "secondUserId": secondUserId,
-      "message": [
-        {
-          "senderId": firstUserId,
-          "text": message,
-          "timestamp": DateTime.now().millisecondsSinceEpoch,
-        }
-      ]
-    });
-    request.headers.addAll(headers);
+  // Future<CreateConversationResponseModel> createConversation(
+  //     String firstUserId, String secondUserId, String message) async {
+  //   var headers = {'Content-Type': 'application/json'};
+  //   var request = http.Request(
+  //       'POST', Uri.parse('$http_ip/api/conversation/createconversation'));
+  //   request.body = json.encode({
+  //     "firstUserId": firstUserId,
+  //     "secondUserId": secondUserId,
+  //     "message": [
+  //       {
+  //         "senderId": firstUserId,
+  //         "text": message,
+  //         "timestamp": DateTime.now().millisecondsSinceEpoch,
+  //       }
+  //     ]
+  //   });
+  //   request.headers.addAll(headers);
 
-    http.StreamedResponse response = await request.send();
+  //   http.StreamedResponse response = await request.send();
 
-    if (response.statusCode == 200) {
-      print(await response.stream.bytesToString());
-    } else {
-      print(response.reasonPhrase);
-    }
-  }
+  //   if (response.statusCode == 200) {
+  //     print(await response.stream.bytesToString());
+  //   } else {
+  //     print(response.reasonPhrase);
+  //   }
+  // }
 
   Socket socket;
 
@@ -213,10 +213,6 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
   }
 
   Future<void> _makePhoneCall(String phoneNumber) async {
-    // Use `Uri` to ensure that `phoneNumber` is properly URL-encoded.
-    // Just using 'tel:$phoneNumber' would create invalid URLs in some cases,
-    // such as spaces in the input, which would cause `launch` to fail on some
-    // platforms.
     final Uri launchUri = Uri(
       scheme: 'tel',
       path: phoneNumber,
@@ -314,11 +310,12 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                   onTap: () {
                     //print(widget.conversationList);
                     //print(myid);
-                    print(this.convoMap['conversation']['secondUserId']
-                        ['phonenumber']);
-                    // print(this.messageList.reversed);
-                    _makePhoneCall(this.convoMap['conversation']['secondUserId']
-                        ['phonenumber']);
+                    // print(this.convoMap['conversation']['secondUserId']
+                    //     ['phonenumber']);
+                    List rev = this.messageList.reversed;
+                    print(this.messageList.reversed);
+                    // _makePhoneCall(this.convoMap['conversation']['secondUserId']
+                    //     ['phonenumber']);
                   },
                   child: Icon(
                     Icons.phone,
@@ -349,7 +346,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                 this.messageList != null
                     ? ListView.builder(
                         itemCount: this.messageList.length,
-                        //  reverse: true,
+                        //reverse: true,
                         shrinkWrap: true,
                         padding: EdgeInsets.only(top: 10, bottom: 10),
                         physics: NeverScrollableScrollPhysics(),

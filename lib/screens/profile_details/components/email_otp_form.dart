@@ -123,12 +123,13 @@ class _EmailOtpFormState extends State<EmailOtpForm> {
       print(jsonDecode(_response.body));
       cherryToastSuccess("Email Updated", context);
       await settingSharedPreference();
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ProfileScreen(),
-        ),
-      );
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(
+      //     builder: (context) => ProfileScreen(),
+      //   ),
+      // );
+      Navigator.popUntil(context, ModalRoute.withName(ProfileScreen.routeName));
       //print(await response.stream.bytesToString());
     } else {
       print(response.reasonPhrase);

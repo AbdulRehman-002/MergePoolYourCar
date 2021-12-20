@@ -6,12 +6,12 @@ import 'package:pool_your_car/size_config.dart';
 const googleApiKey = 'AIzaSyCsh2LKtmVlhmQVDF-1jp3Ci6jWG_vUMzw';
 
 //const myip = "poolyourcar.herokuapp.com"; //for heroku
-//const myip = "poolyourcar.herokuapp.com";
-const myip = "poolyourcarfypbackend.herokuapp.com"; //internet ip
-//const http_ip = "http://$myip:3000"; //mine http for running locally in pc
+const myip = "192.168.10.8";
+//const myip = "poolyourcarfypbackend.herokuapp.com"; //internet ip
+const http_ip = "http://$myip:3000"; //mine http for running locally in pc
 
-const http_ip = "https://$myip"; //my
-//const before_http_ip_was = "https://$myip"; //judes https when repo cloned
+//const http_ip = "https://$myip"; //my
+//const before_http_ip_was = "https://$myip"; // https when repo cloned
 
 bool isUserBlocked = false;
 
