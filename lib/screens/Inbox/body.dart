@@ -133,16 +133,18 @@ class _BodyState extends State<Body> {
                           );
                         },
                       )
-                    : Center(
-                        child: Text(
-                          "No Conversations",
-                          style: TextStyle(
-                            // color: Colors.black,
-                            fontSize: getProportionateScreenWidth(28),
-                            fontWeight: FontWeight.w500,
-                          ),
+                    : Container(
+                        // child: Center(
+                        //   child: Text(
+                        //     "No Conversations",
+                        //     style: TextStyle(
+                        //       // color: Colors.black,
+                        //       fontSize: getProportionateScreenWidth(28),
+                        //       fontWeight: FontWeight.w500,
+                        //     ),
+                        //   ),
+                        // ),
                         ),
-                      ),
               ],
             ),
           ),

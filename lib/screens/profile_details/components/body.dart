@@ -318,25 +318,25 @@ class _BodyState extends State<Body> {
             ),
             //SizedBox(height: SizeConfig.screenHeight * 0.02),
             Divider(thickness: 1.5, color: kPrimaryColor),
-            this.email_verified
-                ? Container()
-                : GestureDetector(
-                    onTap: () {
-                      print("verify email address clicked");
-                    },
-                    child: Row(
-                      children: [
-                        Text(
-                          "verify email address",
-                          style: TextStyle(
-                            color: kPrimaryColor,
-                            fontSize: getProportionateScreenWidth(15),
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+            // this.email_verified
+            //     ? Container()
+            //     : GestureDetector(
+            //         onTap: () {
+            //           print("verify email address clicked");
+            //         },
+            //         child: Row(
+            //           children: [
+            //             Text(
+            //               "verify email address",
+            //               style: TextStyle(
+            //                 color: kPrimaryColor,
+            //                 fontSize: getProportionateScreenWidth(15),
+            //                 fontWeight: FontWeight.w500,
+            //               ),
+            //             ),
+            //           ],
+            //         ),
+            //       ),
             SizedBox(height: SizeConfig.screenHeight * 0.02),
 
             Row(

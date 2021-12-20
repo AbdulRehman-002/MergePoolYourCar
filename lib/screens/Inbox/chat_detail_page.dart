@@ -10,6 +10,7 @@ import 'body.dart';
 import 'display_chat_message.dart';
 import '../../constants.dart';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 
 class ChatDetailPage extends StatefulWidget {
   final String conversationId;
@@ -211,6 +212,18 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
     }
   }
 
+  Future<void> _makePhoneCall(String phoneNumber) async {
+    // Use `Uri` to ensure that `phoneNumber` is properly URL-encoded.
+    // Just using 'tel:$phoneNumber' would create invalid URLs in some cases,
+    // such as spaces in the input, which would cause `launch` to fail on some
+    // platforms.
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: phoneNumber,
+    );
+    await launch(launchUri.toString());
+  }
+
   callsharedpreffunction() async {
     await gettingSharedPreference();
   }
@@ -301,10 +314,11 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                   onTap: () {
                     //print(widget.conversationList);
                     //print(myid);
-                    // print(
-                    //   DateTime.now().millisecondsSinceEpoch,
-                    // );
-                    print(this.messageList.reversed);
+                    print(this.convoMap['conversation']['secondUserId']
+                        ['phonenumber']);
+                    // print(this.messageList.reversed);
+                    _makePhoneCall(this.convoMap['conversation']['secondUserId']
+                        ['phonenumber']);
                   },
                   child: Icon(
                     Icons.phone,

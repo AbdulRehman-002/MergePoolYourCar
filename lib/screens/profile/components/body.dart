@@ -4,6 +4,8 @@ import 'package:pool_your_car/constants.dart';
 import 'package:pool_your_car/screens/help_center/help_center_screen.dart';
 import 'package:pool_your_car/screens/profile_details/profile_details_screen.dart';
 import 'package:pool_your_car/screens/profile_details/profile_details_screen.dart';
+import 'package:pool_your_car/screens/sign_in/sign_in_screen.dart';
+import 'package:pool_your_car/screens/splash/splash_screen.dart';
 
 import '../../../size_config.dart';
 
@@ -112,7 +114,10 @@ class _BodyState extends State<Body> {
           ProfileMenu(
             text: "Log Out",
             icon: "assets/icons/Log out.svg",
-            press: () {},
+            press: () {
+              Navigator.popUntil(
+                  context, ModalRoute.withName(SplashScreen.routeName));
+            },
           ),
         ],
       ),
