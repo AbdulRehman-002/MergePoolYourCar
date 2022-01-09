@@ -92,7 +92,7 @@ class _RidePlanState extends State<RidePlan> {
     var request = http.Request(
         'DELETE',
         Uri.parse(
-            '$http_ip/api/ride/deleteofferedride/${widget.rideid.toString()}'));
+            'https://$myip/api/ride/deleteofferedride/${widget.rideid.toString()}'));
     request.body = json.encode({
       "userId": this.sharedprefenrenceid,
     });
@@ -126,8 +126,16 @@ class _RidePlanState extends State<RidePlan> {
           context, MaterialPageRoute(builder: (context) => HomeScreen()));
     } else {
       print(response.reasonPhrase);
-
-      cherryToastError("Deletion Failed", context);
+      CherryToast.error(
+        toastDuration: Duration(seconds: 5),
+        title: "",
+        enableIconAnimation: true,
+        displayTitle: false,
+        description: "Deletion Failed",
+        toastPosition: POSITION.BOTTOM,
+        animationDuration: Duration(milliseconds: 1000),
+        autoDismiss: true,
+      ).show(context);
     }
   }
 
@@ -135,7 +143,7 @@ class _RidePlanState extends State<RidePlan> {
     print("Before url");
     http.Response response = await http.post(
         Uri.parse(
-            '$http_ip/api/ride/cancelbookedride/${widget.rideid.toString()}'),
+            'https://$myip/api/ride/cancelbookedride/${widget.rideid.toString()}'),
         body: json.encode({
           "userId": this.sharedprefenrenceid,
         }),
@@ -190,7 +198,8 @@ class _RidePlanState extends State<RidePlan> {
     var headers = {'Content-Type': 'application/json'};
     print("Before url");
     http.Response response = await http.get(
-        Uri.parse('$http_ip/api/ride/passengers/${widget.rideid.toString()}'),
+        Uri.parse(
+            'https://$myip/api/ride/passengers/${widget.rideid.toString()}'),
         headers: headers);
 
     List<dynamic> passengerData = json.decode(response.body)['passengers'];
@@ -263,7 +272,7 @@ class _RidePlanState extends State<RidePlan> {
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: kPrimaryColor),
-        title: Text("Ride Plan"),
+        //title: Text("Ride Plan"),
       ),
       body: SafeArea(
         child: SizedBox(
@@ -275,12 +284,12 @@ class _RidePlanState extends State<RidePlan> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  SizedBox(height: SizeConfig.screenHeight * 0.02),
+                  SizedBox(height: SizeConfig.screenHeight * 0.04),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Ride Details",
+                        "Ride Plan",
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: getProportionateScreenWidth(24),
@@ -439,7 +448,6 @@ class _RidePlanState extends State<RidePlan> {
                       ),
                     ],
                   ),
-                  SizedBox(height: SizeConfig.screenHeight * 0.02),
                   Row(
                     children: [
                       Text(
@@ -452,6 +460,27 @@ class _RidePlanState extends State<RidePlan> {
                       Spacer(),
                       Text(
                         "${widget.offeredseats}",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: getProportionateScreenWidth(15),
+                            fontWeight: FontWeight.w700),
+                      ),
+                    ],
+                  ),
+
+                  SizedBox(height: SizeConfig.screenHeight * 0.02),
+                  Row(
+                    children: [
+                      Text(
+                        "Available Seats",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: getProportionateScreenWidth(15),
+                            fontWeight: FontWeight.w700),
+                      ),
+                      Spacer(),
+                      Text(
+                        "${widget.availableseats}",
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: getProportionateScreenWidth(15),
@@ -591,7 +620,7 @@ class _RidePlanState extends State<RidePlan> {
                               CircleAvatar(
                                 backgroundImage: this.image_is_uploaded
                                     ? NetworkImage(
-                                        "$http_ip/images/${passengers[index].profileImageUrl}")
+                                        "https://$myip/images/${passengers[index].profileImageUrl}")
                                     : AssetImage(
                                         "assets/images/Profile Image.png"),
                               ),
@@ -638,7 +667,6 @@ class _RidePlanState extends State<RidePlan> {
                         ),
                         onPressed: () => {
                           print("Edit ride clicked"),
-                          print(widget.rideid),
                           Navigator.push(
                             context,
                             MaterialPageRoute(

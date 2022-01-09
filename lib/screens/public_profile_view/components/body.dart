@@ -57,7 +57,7 @@ class _BodyState extends State<Body> {
       String firstUserId, String secondUserId, String message) async {
     var headers = {'Content-Type': 'application/json'};
     var request = http.Request(
-        'POST', Uri.parse('$http_ip/api/conversation/createconversation'));
+        'POST', Uri.parse('$myip/api/conversation/createconversation'));
     request.body = json.encode({
       "firstUserId": firstUserId,
       "secondUserId": secondUserId,
@@ -87,7 +87,7 @@ class _BodyState extends State<Body> {
     print('second user id ' + widget.userid);
     var res;
     String url =
-        '$http_ip/api/conversation/searchconversationexists/${this.sharedprefenrenceid}/${widget.userid}';
+        '$myip/api/conversation/searchconversationexists/${this.sharedprefenrenceid}/${widget.userid}';
     var request = http.Request('GET', Uri.parse(url));
 
     http.StreamedResponse response = await request.send();
@@ -137,7 +137,7 @@ class _BodyState extends State<Body> {
     print("object");
     print(widget.userid);
     final response = await http
-        .get(Uri.parse("$http_ip/api/getsingleuser/${widget.userid}"));
+        .get(Uri.parse("https://$myip/api/getsingleuser/${widget.userid}"));
     if (response.statusCode == 200) {
       // print("Now Getting user data in profile details screen");
       // print(jsonDecode(response.body));
@@ -200,7 +200,7 @@ class _BodyState extends State<Body> {
               child: CircleAvatar(
                 backgroundImage: this.image_is_uploaded
                     ? NetworkImage(
-                        "$http_ip/images/${this.user_profile_image_url}")
+                        "https://$myip/images/${this.user_profile_image_url}")
                     : AssetImage("assets/images/Profile Image.png"),
               ),
             ),

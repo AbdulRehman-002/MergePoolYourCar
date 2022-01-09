@@ -52,7 +52,6 @@ class _BodyState extends State<Body> {
   DateFormat format = DateFormat("EEE, d LLLL y h:mm a");
   DateTime parsedDate;
   String sharedprefenrenceid;
-
   gettingSharedPreference() async {
     Future<SharedPreferences> preferences = SharedPreferences.getInstance();
     final SharedPreferences prefs = await preferences;
@@ -75,8 +74,8 @@ class _BodyState extends State<Body> {
   var users = new List<GetOverallOfferedRidesResponseModel>();
   // ignore: missing_return
   Future<GetOverallOfferedRidesResponseModel> fetchOverallOfferedRides() async {
-    final response =
-        await http.get(Uri.parse('$http_ip/api/ride/getoverallofferedrides'));
+    final response = await http
+        .get(Uri.parse('https://$myip/api/ride/getoverallofferedrides'));
     list = json.decode(response.body);
 
     if (response.statusCode == 200) {
@@ -90,7 +89,7 @@ class _BodyState extends State<Body> {
       // return GetOverallOfferedRidesResponseModel.fromJson(
       //     jsonDecode(response.body));
     } else {
-      throw Exception('Failed to load album');
+      throw Exception('Failed ro load overall offered rides');
     }
   }
 
@@ -117,11 +116,12 @@ class _BodyState extends State<Body> {
           format.parse(list[i]["date"] + " " + list[i]["time"]);
 
       if (
-          // _searcheddatetime.isAtSameMomentAs(_ridelistdatetime) &&
-
-          droplocationdistanceInKiloMeters < 6.0 &&
-              pickuplocationdistanceInKiloMeters < 2.0 &&
-              widget.noofpassengers <= list[i]["availableseats"]) {
+          //_searcheddatetime.isAtSameMomentAs(_ridelistdatetime) &&
+          droplocationdistanceInKiloMeters < 10.0 &&
+              pickuplocationdistanceInKiloMeters < 2.0
+          //&&
+          //widget.noofpassengers <= list[i]["availableseats"]
+          ) {
         // print(i);
         // print("--Pickup location:---");
         // print("list pickup loc : " + list[i]["pickuplocation"]);
@@ -164,7 +164,7 @@ class _BodyState extends State<Body> {
     }
   }
 
-  Future<dynamic> callfunction() async {
+  void callfunction() async {
     await fetchOverallOfferedRides();
     await calculatedistance();
     printlist();
@@ -174,7 +174,10 @@ class _BodyState extends State<Body> {
   void initState() {
     super.initState();
 
+    //fetchOverallOfferedRides();
     callfunction();
+    //calculatedistance();
+    //printlist();
   }
 
   @override
@@ -211,27 +214,6 @@ class _BodyState extends State<Body> {
           //   },
           // ),
 
-          // FutureBuilder(
-          //   future: callfunction(),
-          //   builder: (BuildContext context, AsyncSnapshot snapshot) {
-          //     if (snapshot.data == null) {
-          //       return Expanded(
-          //         child: Container(
-          //           child: Center(
-          //             child: Text(
-          //               "No  rides to show",
-          //               style: TextStyle(
-          //                 //color: Colors.black,
-          //                 fontSize: getProportionateScreenWidth(20),
-          //                 fontWeight: FontWeight.w500,
-          //               ),
-          //             ),
-          //           ),
-          //         ),
-          //       );
-          // }
-          // else {
-          // return
           Expanded(
             child: Container(
               child: !this.isSortedListEmpty
@@ -281,11 +263,7 @@ class _BodyState extends State<Body> {
                       ),
                     ),
             ),
-          )
-          //       ;
-          //     }
-          //   },
-          // ),
+          ),
         ],
       ),
     );

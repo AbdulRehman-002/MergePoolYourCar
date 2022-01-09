@@ -17,8 +17,9 @@ class SearchRideScreen extends StatelessWidget {
         ),
       ),
       body: Body(),
-      bottomNavigationBar:
-          CustomBottomNavBar(selectedMenu: MenuState.searchride),
+      bottomNavigationBar: CustomBottomNavBar(
+        selectedMenu: MenuState.searchride,
+      ),
     );
   }
 }

@@ -1,3 +1,4 @@
+
 // ignore_for_file: non_constant_identifier_names
 
 import 'dart:convert';
@@ -23,9 +24,7 @@ import '../../../../../size_config.dart';
 import 'package:http/http.dart' as http;
 
 class Body extends StatefulWidget {
-  Body({
-    Key key,
-  }) : super(key: key);
+  Body({ Key key,}) : super(key: key);
 
   @override
   _BodyState createState() => _BodyState();
@@ -57,57 +56,67 @@ class _BodyState extends State<Body> {
     //GetUserDetails();
   }
 
-  Future<void> getWalletDetail() async {
+  Future<void> getWalletDetail() async{
+
     Map<String, String> headers = {'Content-Type': 'application/json'};
     print("Before url");
     http.Response response = await http.post(
-        Uri.parse('$http_ip/api/payment/getwalletdetails'),
+        Uri.parse(
+            'https://$myip/api/payment/getwalletdetails'),
         headers: headers,
-        body: json.encode({'userId': sharedprefenrenceid}));
+        body: json.encode({
+          'userId': sharedprefenrenceid
+        })
+      );
 
-    setState(() {
+    setState((){
       model = WalletModel.fromJson(response.body);
     });
+
   }
 
-  Future<void> sendCredit() async {
+  Future<void> sendCredit() async{
+
     Map<String, String> headers = {'Content-Type': 'application/json'};
     print("Before url");
     print(amountController.text);
     print(uniqueIdController.text);
-    if (amountController.text == '' || uniqueIdController.text == '') {
+    if (amountController.text == '' || uniqueIdController.text == ''){
       CherryToast.error(
-        toastDuration: Duration(seconds: 2),
-        title: "",
-        enableIconAnimation: true,
-        displayTitle: false,
-        description: "Enter All Data",
-        toastPosition: POSITION.BOTTOM,
-        animationDuration: Duration(milliseconds: 500),
-        autoDismiss: true,
-      ).show(context);
-    } else {
+            toastDuration: Duration(seconds: 2),
+            title: "",
+            enableIconAnimation: true,
+            displayTitle: false,
+            description: "Enter All Data",
+            toastPosition: POSITION.BOTTOM,
+            animationDuration: Duration(milliseconds: 500),
+            autoDismiss: true,
+          ).show(context);
+    }else{
       Loader.show(context,
           isAppbarOverlay: true,
           isBottomBarOverlay: true,
           progressIndicator: CircularProgressIndicator(
             backgroundColor: kPrimaryColor,
           ),
-          themeData: Theme.of(context).copyWith(accentColor: Colors.green),
+          themeData: Theme.of(context)
+              .copyWith(accentColor: Colors.green),
           overlayColor: Color(0x99E8EAF6));
 
       try {
-        http.Response response =
-            await http.post(Uri.parse('$http_ip/api/user/sendCredits'),
-                headers: headers,
-                body: json.encode({
-                  'userId': sharedprefenrenceid,
-                  'amountSent': int.parse(amountController.text),
-                  'receiverId': '+${uniqueIdController.text}'
-                }));
+        http.Response response = await http.post(
+            Uri.parse(
+                'https://$myip/api/user/sendCredits'),
+            headers: headers,
+            body: json.encode({
+              'userId': sharedprefenrenceid,
+              'amountSent': int.parse(amountController.text),
+              'receiverId': '+${uniqueIdController.text}'
+            })
+          );
 
         if (response.statusCode == 200) {
-          setState(() {
+          setState((){
             model = WalletModel.fromJson(response.body);
           });
           CherryToast.success(
@@ -120,7 +129,7 @@ class _BodyState extends State<Body> {
             animationDuration: Duration(milliseconds: 2000),
             autoDismiss: true,
           ).show(context);
-        } else {
+        }else {
           CherryToast.error(
             toastDuration: Duration(seconds: 2),
             title: "",
@@ -132,21 +141,23 @@ class _BodyState extends State<Body> {
             autoDismiss: true,
           ).show(context);
         }
-      } catch (err) {
+      }catch(err){
         CherryToast.error(
-          toastDuration: Duration(seconds: 2),
-          title: "",
-          enableIconAnimation: true,
-          displayTitle: false,
-          description: "Invalid data",
-          toastPosition: POSITION.BOTTOM,
-          animationDuration: Duration(milliseconds: 500),
-          autoDismiss: true,
-        ).show(context);
+            toastDuration: Duration(seconds: 2),
+            title: "",
+            enableIconAnimation: true,
+            displayTitle: false,
+            description: "Invalid data",
+            toastPosition: POSITION.BOTTOM,
+            animationDuration: Duration(milliseconds: 500),
+            autoDismiss: true,
+          ).show(context);
       }
+      
 
       Loader.hide();
     }
+
   }
 
   Future<void> callFunctions() async {
@@ -154,10 +165,12 @@ class _BodyState extends State<Body> {
     await getWalletDetail();
   }
 
+  
   @override
   void initState() {
     super.initState();
     callFunctions();
+   
   }
 
   @override
@@ -165,7 +178,7 @@ class _BodyState extends State<Body> {
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: kPrimaryColor),
-        title: Text("Wallet"),
+        //title: Text("Ride Plan"),
       ),
       resizeToAvoidBottomInset: true,
       body: Padding(
@@ -194,7 +207,7 @@ class _BodyState extends State<Body> {
               ), //00331
 
               SizedBox(height: SizeConfig.screenHeight * 0.05),
-
+              
               SizedBox(
                 height: 60,
                 child: Row(
@@ -209,7 +222,7 @@ class _BodyState extends State<Body> {
                     ),
                     Spacer(),
                     Text(
-                      model.uniqueId ?? "",
+                      model.uniqueId??"",
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: getProportionateScreenWidth(15),
@@ -221,7 +234,7 @@ class _BodyState extends State<Body> {
               ),
 
               SizedBox(height: SizeConfig.screenHeight * 0.02),
-
+              
               SizedBox(
                 height: 60,
                 child: Row(
@@ -237,7 +250,7 @@ class _BodyState extends State<Body> {
                     Spacer(),
                     Container(
                       child: Text(
-                        'Rs. ${model.balance ?? ''}',
+                        'Rs. ${model.balance??''}',
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: getProportionateScreenWidth(15),
@@ -252,16 +265,14 @@ class _BodyState extends State<Body> {
               SizedBox(height: SizeConfig.screenHeight * 0.02),
 
               DefaultButton(
-                  text: "Mini Statement",
-                  press: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => MiniStatement(
-                                  userId: sharedprefenrenceid,
-                                )));
-                  } //bookRide
-                  ),
+                text: "Mini Statement",
+                press: (){
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) => MiniStatement(
+                      userId: sharedprefenrenceid,
+                    )));
+                }//bookRide
+              ),
 
               SizedBox(height: SizeConfig.screenHeight * 0.02),
 
@@ -279,7 +290,8 @@ class _BodyState extends State<Body> {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    Expanded(child: const SizedBox())
+                    Expanded(
+                      child: const SizedBox())
                     //Icon(Icons.arrow_forward_ios),
                   ],
                 ),
@@ -288,18 +300,19 @@ class _BodyState extends State<Body> {
               Container(
                 padding: EdgeInsets.all(10),
                 child: Container(
-                    child: TextField(
-                        controller: uniqueIdController,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
-                        onChanged: (text) {
-                          uniqueId = text;
-                        },
-                        decoration: InputDecoration(
-                            hintText: "Enter Wallet Id of Reciever"))),
+                  child: TextField(
+                    controller: uniqueIdController,
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    onChanged: (text) {
+                      uniqueId = text;
+                    },
+                    decoration: InputDecoration(
+                      hintText: "Enter Wallet Id of Reciever"
+                    )
+                  )
+                ),
               ),
-
+              
               SizedBox(height: SizeConfig.screenHeight * 0.02),
 
               SizedBox(
@@ -314,7 +327,8 @@ class _BodyState extends State<Body> {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    Expanded(child: const SizedBox())
+                    Expanded(
+                      child: const SizedBox())
                     //Icon(Icons.arrow_forward_ios),
                   ],
                 ),
@@ -323,18 +337,19 @@ class _BodyState extends State<Body> {
               Container(
                 padding: EdgeInsets.all(10),
                 child: Container(
-                    child: TextField(
-                        controller: amountController,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
-                        onChanged: (text) {
-                          amount = text;
-                        },
-                        decoration: InputDecoration(
-                            hintText: "Enter Ammount to be Sent"))),
+                  child: TextField(
+                    controller: amountController,
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    onChanged: (text) {
+                      amount = text;
+                    },
+                    decoration: InputDecoration(
+                      hintText: "Enter Ammount to be Sent"
+                    )
+                  )
+                ),
               ),
-
+              
               SizedBox(height: SizeConfig.screenHeight * 0.02),
 
               // Divider(thickness: 1.8, color: kPrimaryColor),
@@ -342,11 +357,11 @@ class _BodyState extends State<Body> {
               SizedBox(height: SizeConfig.screenHeight * 0.02),
 
               DefaultButton(
-                  text: "Send Credit",
-                  press: () {
-                    sendCredit();
-                  } //bookRide
-                  ),
+                text: "Send Credit",
+                press: (){
+                  sendCredit();
+                }//bookRide
+              ),
 
               SizedBox(height: SizeConfig.screenHeight * 0.04),
             ],
@@ -356,3 +371,4 @@ class _BodyState extends State<Body> {
     );
   }
 }
+

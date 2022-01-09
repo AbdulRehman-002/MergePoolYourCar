@@ -210,7 +210,18 @@ class _BodyState extends State<Body> {
                       print(date);
                       print(time);
                       print(cartype);
-
+                      Loader.show(context,
+                          isAppbarOverlay: true,
+                          isBottomBarOverlay: true,
+                          progressIndicator: CircularProgressIndicator(
+                            backgroundColor: kPrimaryColor,
+                          ),
+                          themeData: Theme.of(context)
+                              .copyWith(accentColor: Colors.green),
+                          overlayColor: Color(0x99E8EAF6));
+                      await Future.delayed(Duration(seconds: 5), () {
+                        Loader.hide();
+                      });
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -397,13 +408,13 @@ class _BodyState extends State<Body> {
                 context: context,
                 firstDate: DateTime.now(),
                 initialDate: currentValue ?? DateTime.now(),
-
                 lastDate: DateTime(
-                  (DateTime.now().month <= 9) ? DateTime.now().year: DateTime.now().year + 1,
-                  (DateTime.now().month <= 9) ? DateTime.now().month + 3 : DateTime.now().month - 9
-                )
-            );
-
+                    (DateTime.now().month <= 9)
+                        ? DateTime.now().year
+                        : DateTime.now().year + 1,
+                    (DateTime.now().month <= 9)
+                        ? DateTime.now().month + 3
+                        : DateTime.now().month - 9));
           },
         ),
       ],
@@ -450,12 +461,7 @@ class _BodyState extends State<Body> {
       showSelectedItems: true,
       //maxHeight: 70,
       //searchBoxDecoration: ,
-      items: [
-        "Mini Car",
-        "Sedan Car",
-        "Hatchback Car",
-        "Premium Car",
-      ],
+      items: ["Mini Car", "Standard Car", "Premium Car"],
       //label: "Menu mode *",
       showClearButton: true,
       onChanged: (value) {

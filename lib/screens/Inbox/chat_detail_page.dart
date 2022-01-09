@@ -31,6 +31,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
   List messageList = [];
   List<dynamic> reverseMessageList = [];
   String secondUserId = '';
+  ScrollController scrollController;
 
   gettingSharedPreference() async {
     Future<SharedPreferences> preferences = SharedPreferences.getInstance();
@@ -51,7 +52,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
   //     String firstUserId, String secondUserId, String message) async {
   //   var headers = {'Content-Type': 'application/json'};
   //   var request = http.Request(
-  //       'POST', Uri.parse('$http_ip/api/conversation/createconversation'));
+  //       'POST', Uri.parse('$myip/api/conversation/createconversation'));
   //   request.body = json.encode({
   //     "firstUserId": firstUserId,
   //     "secondUserId": secondUserId,
@@ -80,7 +81,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
     try {
       // Configure socket transports must be sepecified
       socket = io(
-          '$http_ip',
+          '$myip',
           OptionBuilder()
               .setTransports(['websocket'])
               .enableForceNewConnection()
@@ -154,13 +155,14 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
       this.messageList = data['message'];
       // this.reverseMessageList = this.messageList.reversed;
     });
+    scrollController.jumpTo(scrollController.position.maxScrollExtent);
   }
 
   Future<GetSingleConversationResponseModel> getConversation() async {
     var request = http.Request(
         'GET',
         Uri.parse(
-            '$http_ip/api/conversation/getsingleconversation/${widget.conversationId}'));
+            '$myip/api/conversation/getsingleconversation/${widget.conversationId}'));
 
     http.StreamedResponse response = await request.send();
 
@@ -189,7 +191,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
     var request = http.Request(
         'PUT',
         Uri.parse(
-            '$http_ip/api/conversation/appendmessageinconversation/${widget.conversationId}'));
+            '$myip/api/conversation/appendmessageinconversation/${widget.conversationId}'));
     request.body = json.encode({
       "senderId": this.myid,
       "text": message,
@@ -207,6 +209,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
         this.messageList = responseMap['conversation']['message'];
         //this.reverseMessageList = this.messageList.reversed;
       });
+      scrollController.jumpTo(scrollController.position.maxScrollExtent);
     } else {
       print(response.reasonPhrase);
     }
@@ -229,6 +232,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
     super.initState();
     getConversation();
     callsharedpreffunction();
+    scrollController = ScrollController();
     // connectToServer();
   }
 
@@ -274,7 +278,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                                 .seconduserMap['profile_image_url'] !=
                             null
                         ? NetworkImage(
-                            "$http_ip/images/${widget.seconduserMap['profile_image_url']}")
+                            "https://$myip/images/${widget.seconduserMap['profile_image_url']}")
                         : AssetImage("assets/images/Profile Image.png"),
                   ),
                 ),
@@ -312,10 +316,10 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                     //print(myid);
                     // print(this.convoMap['conversation']['secondUserId']
                     //     ['phonenumber']);
-                    List rev = this.messageList.reversed;
-                    print(this.messageList.reversed);
-                    // _makePhoneCall(this.convoMap['conversation']['secondUserId']
-                    //     ['phonenumber']);
+                    //List rev = this.messageList.reversed;
+                    // print(this.messageList.reversed);
+                    _makePhoneCall(this.convoMap['conversation']['secondUserId']
+                        ['phonenumber']);
                   },
                   child: Icon(
                     Icons.phone,
@@ -346,6 +350,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                 this.messageList != null
                     ? ListView.builder(
                         itemCount: this.messageList.length,
+                        controller: scrollController,
                         //reverse: true,
                         shrinkWrap: true,
                         padding: EdgeInsets.only(top: 10, bottom: 10),

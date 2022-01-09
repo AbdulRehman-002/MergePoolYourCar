@@ -8,8 +8,8 @@ import 'package:intl_phone_field/phone_number.dart';
 import 'package:pool_your_car/components/custom_surfix_icon.dart';
 import 'package:pool_your_car/components/default_button.dart';
 import 'package:pool_your_car/components/form_error.dart';
+import 'package:pool_your_car/screens/home/home_screen.dart';
 import 'package:pool_your_car/screens/otp/otp_screen.dart';
-import 'package:pool_your_car/screens/signup_success/signup_success_screen.dart';
 import '../../../constants.dart';
 import '../../../size_config.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -32,7 +32,7 @@ class CompleteProfileForm extends StatefulWidget {
 //     String password,
 //     String confirmpassword) async {
 //   print(email);
-//   final String apiUrl = "$http_ip/api/user/add";
+//   final String apiUrl = "http://$myip:3000/api/user/add";
 //   var body = jsonEncode({
 //     "firstname": firstname,
 //     "lastname": lastname,
@@ -146,7 +146,7 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
                     String password,
                     String confirmpassword) async {
                   print(email);
-                  final String apiUrl = "$http_ip/api/user/add";
+                  final String apiUrl = "https://$myip/api/user/add";
                   var body = jsonEncode({
                     "firstname": firstname,
                     "lastname": lastname,
@@ -189,9 +189,7 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
                           fontSize: 20.0,
                         );
                         if (check) {
-                          // Navigator.pushNamed(context, OtpScreen.routeName);
-                          Navigator.pushNamed(
-                              context, SignupSuccessScreen.routeName);
+                          Navigator.pushNamed(context, HomeScreen.routeName);
                         }
                         return sigupResponseModelFromJson(responseString);
                       } else {

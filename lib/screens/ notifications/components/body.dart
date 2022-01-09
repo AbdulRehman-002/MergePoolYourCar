@@ -6,7 +6,7 @@ import 'package:pool_your_car/constants.dart';
 import 'package:pool_your_car/screens/%20notifications/components/notification_container.dart';
 import 'package:pool_your_car/size_config.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+    
 class Body extends StatefulWidget {
   const Body({Key key}) : super(key: key);
 
@@ -15,6 +15,8 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+
+
   String sharedprefenrenceid;
   List notifications;
   bool isNotificationEmpty = true;
@@ -32,7 +34,7 @@ class _BodyState extends State<Body> {
     //await gettingSharedPreference();
     print("getting notifications");
     final response = await http.get(Uri.parse(
-        "$http_ip/api/ride/getallpastofferedridesofuser/${this.sharedprefenrenceid}"));
+        "https://$myip/api/ride/getallpastofferedridesofuser/${this.sharedprefenrenceid}"));
     if (response.statusCode == 200) {
       Map<String, dynamic> responseJson = json.decode(response.body);
       setState(() {
@@ -77,14 +79,13 @@ class _BodyState extends State<Body> {
           children: [
             Expanded(
               child: Container(
-                child: !isNotificationEmpty
+                child: 
+                  !isNotificationEmpty
                     ? ListView.builder(
                         itemCount: this.notifications.length,
                         itemBuilder: (BuildContext context, int index) {
                           return NotificationContainer(
-
                             passengerID: this.notifications[index]['senderID'],
-
                             type: this.notifications[index]['type'],
                             dropLocation: this.notifications[index]['from'],
                             pickUpLocation: this.notifications[index]['to'],
@@ -93,7 +94,8 @@ class _BodyState extends State<Body> {
                             read: this.notifications[index]['read'],
                           );
                         })
-                    : Center(
+                    : 
+                    Center(
                         child: Text(
                           "No Notifications to show",
                           style: TextStyle(

@@ -53,8 +53,6 @@ class GetUserPastOfferedRidesResponseModel {
         emailverified: json["emailverified"],
         offeredride: List<String>.from(json["offeredride"].map((x) => x)),
         bookedride: List<dynamic>.from(json["bookedride"].map((x) => x)),
-        // pastofferedride: List<dynamic>.from(
-        //     json["pastofferedride"].map((x) => Pastofferedride.fromJson(x))),
         pastofferedride: List<Pastofferedride>.from(
             json["pastofferedride"].map((x) => Pastofferedride.fromJson(x))),
         pastbookedride:

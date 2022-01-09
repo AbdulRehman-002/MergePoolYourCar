@@ -39,6 +39,8 @@ class PastRidesContainer extends StatelessWidget {
     @required this.discount,
     @required this.discription,
     @required this.ridefare,
+
+    //this.image,
   }) : super(key: key);
   //final DateTime date = DateTime.now();
 

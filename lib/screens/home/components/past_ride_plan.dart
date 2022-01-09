@@ -40,7 +40,7 @@ class PastRidePlan extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: kPrimaryColor),
-        title: Text("Past Ride Plan"),
+        //title: Text("Ride Plan"),
       ),
       body: SafeArea(
         child: SizedBox(
@@ -182,6 +182,10 @@ class PastRidePlan extends StatelessWidget {
                           ),
                         ),
                       ),
+                      // Icon(
+                      //   Icons.arrow_forward_ios,
+                      //   color: kPrimaryColor,
+                      // ),
                     ],
                   ),
                   SizedBox(height: SizeConfig.screenHeight * 0.02),
@@ -230,7 +234,7 @@ class PastRidePlan extends StatelessWidget {
                             ),
                             Spacer(),
                             Text(
-                              "Rs $ridefare",
+                              "Rs. 200",
                               style: TextStyle(
                                   color: Colors.black,
                                   fontSize: getProportionateScreenWidth(15),
@@ -258,26 +262,26 @@ class PastRidePlan extends StatelessWidget {
                             ),
                           ],
                         ),
-                        // Row(
-                        //   children: [
-                        //     Text(
-                        //       "Available Seats",
-                        //       style: TextStyle(
-                        //         color: Colors.black,
-                        //         fontSize: getProportionateScreenWidth(12),
-                        //         fontWeight: FontWeight.w500,
-                        //       ),
-                        //     ),
-                        //     Spacer(),
-                        //     Text(
-                        //       "$bookedseats",
-                        //       style: TextStyle(
-                        //           color: Colors.black,
-                        //           fontSize: getProportionateScreenWidth(15),
-                        //           fontWeight: FontWeight.w700),
-                        //     ),
-                        //   ],
-                        // ),
+                        Row(
+                          children: [
+                            Text(
+                              "Booked Seats",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: getProportionateScreenWidth(12),
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            Spacer(),
+                            Text(
+                              "$bookedseats",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: getProportionateScreenWidth(15),
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ],
+                        ),
                         //SizedBox(height: SizeConfig.screenHeight * 0.02),
                         Divider(thickness: 1.8, color: kPrimaryColor),
                         //SizedBox(height: SizeConfig.screenHeight * 0.02),

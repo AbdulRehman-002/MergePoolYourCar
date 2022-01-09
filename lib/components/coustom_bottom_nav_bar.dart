@@ -24,6 +24,9 @@ class CustomBottomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final Color inActiveIconColor = Color(0xFFB6B6B6);
     return BottomNavigationBar(
+      onTap: (value) {
+        onSelect(value);
+      },
       type: BottomNavigationBarType.fixed,
       backgroundColor: Colors.white,
       selectedItemColor: Colors.white,
@@ -38,7 +41,7 @@ class CustomBottomNavBar extends StatelessWidget {
                   ? kPrimaryColor
                   : inActiveIconColor,
             ),
-            onTap: () => Navigator.pushNamed(context, HomeScreen.routeName),
+            // onTap: () => Navigator.popAndPushNamed(context, HomeScreen.routeName),
           ),
           // ignore: deprecated_member_use
           title: new Text(
@@ -60,10 +63,10 @@ class CustomBottomNavBar extends StatelessWidget {
                   ? kPrimaryColor
                   : inActiveIconColor,
             ),
-            onTap: () => Navigator.pushNamed(
-              context,
-              SearchRideScreen.routeName,
-            ),
+            // onTap: () => Navigator.popAndPushNamed(
+            //   context,
+            //   SearchRideScreen.routeName,
+            // ),
           ),
           // ignore: deprecated_member_use
           title: new Text(
@@ -85,10 +88,10 @@ class CustomBottomNavBar extends StatelessWidget {
                   ? kPrimaryColor
                   : inActiveIconColor,
             ),
-            onTap: () => Navigator.pushNamed(
-              context,
-              OfferRideScreen.routeName,
-            ),
+            // onTap: () => Navigator.popAndPushNamed(
+            //   context,
+            //   OfferRideScreen.routeName,
+            // ),
           ),
           title: new Text(
             'Offer',
@@ -108,10 +111,10 @@ class CustomBottomNavBar extends StatelessWidget {
                   ? kPrimaryColor
                   : inActiveIconColor,
             ),
-            onTap: () => Navigator.pushNamed(
-              context,
-              InboxScreen.routeName,
-            ),
+            // onTap: () => Navigator.popAndPushNamed(
+            //   context,
+            //   InboxScreen.routeName,
+            // ),
           ),
           title: new Text(
             'Chat',
@@ -132,10 +135,7 @@ class CustomBottomNavBar extends StatelessWidget {
                   ? kPrimaryColor
                   : inActiveIconColor,
             ),
-            onTap: () => Navigator.pushNamed(
-              context,
-              ProfileScreen.routeName,
-            ),
+            // onTap: () => Navigator.popAndPushNamed(context, ProfileScreen.routeName),
           ),
           title: new Text(
             'Profile',

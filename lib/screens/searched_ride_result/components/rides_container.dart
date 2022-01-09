@@ -273,32 +273,27 @@ class _RidesContainerState extends State<RidesContainer> {
                         ),
                       ],
                     ),
-
+                    SizedBox(
+                      height: getProportionateScreenHeight(10),
+                    ),
                     if (widget.discount != 0)
-                      Column(
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          SizedBox(
-                            height: getProportionateScreenHeight(10),
+                          Text(
+                            "Discount",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: getProportionateScreenWidth(15),
+                            ),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Discount",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: getProportionateScreenWidth(15),
-                                ),
-                              ),
-                              Spacer(),
-                              Text(
-                                "${widget.discount}",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: getProportionateScreenWidth(15),
-                                ),
-                              ),
-                            ],
+                          Spacer(),
+                          Text(
+                            "${widget.discount}",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: getProportionateScreenWidth(15),
+                            ),
                           ),
                         ],
                       ),

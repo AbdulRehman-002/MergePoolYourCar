@@ -44,7 +44,7 @@ class _PublicUserChatDetailPageState extends State<PublicUserChatDetailPage> {
   //     String firstUserId, String secondUserId, String message) async {
   //   var headers = {'Content-Type': 'application/json'};
   //   var request = http.Request(
-  //       'POST', Uri.parse('$http_ip/api/conversation/createconversation'));
+  //       'POST', Uri.parse('$myip/api/conversation/createconversation'));
   //   request.body = json.encode({
   //     "firstUserId": firstUserId,
   //     "secondUserId": secondUserId,
@@ -73,7 +73,7 @@ class _PublicUserChatDetailPageState extends State<PublicUserChatDetailPage> {
     var request = http.Request(
         'PUT',
         Uri.parse(
-            '$http_ip/api/conversation/appendmessageinconversation/${widget.conversationMap['_id']}'));
+            '$myip/api/conversation/appendmessageinconversation/${widget.conversationMap['_id']}'));
     request.body = json.encode({
       "senderId": this.myid,
       "text": message,
@@ -103,7 +103,7 @@ class _PublicUserChatDetailPageState extends State<PublicUserChatDetailPage> {
     try {
       // Configure socket transports must be sepecified
       socket = io(
-          '$http_ip',
+          '$myip',
           OptionBuilder()
               .setTransports(['websocket'])
               .enableForceNewConnection()
@@ -235,7 +235,7 @@ class _PublicUserChatDetailPageState extends State<PublicUserChatDetailPage> {
                   child: CircleAvatar(
                     backgroundImage: widget.userMap['profile_image_url'] != null
                         ? NetworkImage(
-                            "$http_ip/images/${widget.userMap['profile_image_url']}")
+                            "https://$myip/images/${widget.userMap['profile_image_url']}")
                         : AssetImage("assets/images/Profile Image.png"),
                   ),
                 ),

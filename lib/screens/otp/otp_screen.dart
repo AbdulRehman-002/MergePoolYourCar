@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pool_your_car/size_config.dart';
 
-import '../../constants.dart';
 import 'components/body.dart';
 
 class OtpScreen extends StatelessWidget {
@@ -12,7 +11,6 @@ class OtpScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("OTP Verification"),
-        iconTheme: IconThemeData(color: kPrimaryColor),
       ),
       body: Body(),
     );

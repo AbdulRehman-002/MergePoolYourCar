@@ -7,19 +7,9 @@ import 'package:pool_your_car/screens/%20notifications/notification_screen.dart'
 import 'package:pool_your_car/screens/home/home_screen.dart';
 import 'package:pool_your_car/size_config.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+    
 class NotificationContainer extends StatefulWidget {
-  const NotificationContainer(
-      {Key key,
-      this.type,
-      this.message,
-      this.ride,
-      this.read,
-      this.passengerID,
-      this.pickUpLocation,
-      this.dropLocation,
-      this.firstname})
-      : super(key: key);
+  const NotificationContainer({ Key key, this.type, this.message, this.ride, this.read, this.passengerID, this.pickUpLocation, this.dropLocation, this.firstname }) : super(key: key);
 
   final String passengerID;
   final String type;
@@ -36,7 +26,7 @@ class NotificationContainer extends StatefulWidget {
 
 class _NotificationContainerState extends State<NotificationContainer> {
   String sharedprefenrenceid;
-
+  
   Future<void> gettingSharedPreference() async {
     Future<SharedPreferences> preferences = SharedPreferences.getInstance();
     final SharedPreferences prefs = await preferences;
@@ -57,22 +47,22 @@ class _NotificationContainerState extends State<NotificationContainer> {
     String apiUrl;
     var body;
 
-    if (this.widget.type == 'bookrequest') {
-      apiUrl = "$http_ip/api/ride/acceptbookedride";
+    if (this.widget.type == 'bookrequest'){
+      apiUrl = "https://$myip/api/ride/acceptbookedride";
       body = jsonEncode({
         'rideId': this.widget.ride,
         'passengerID': id,
         'userId': sharedprefenrenceid
       });
-    } else if (this.widget.type == 'startaccepted') {
-      apiUrl = "$http_ip/api/ride/cancelnotification";
+    }else if (this.widget.type == 'startaccepted'){
+      apiUrl = "https://$myip/api/ride/cancelnotification";
       body = jsonEncode({
         'rideId': this.widget.ride,
         'passengerID': id,
         'userId': sharedprefenrenceid
       });
-    } else {
-      apiUrl = "$http_ip/api/ride/acceptstartride";
+    }else{
+      apiUrl = "https://$myip/api/ride/acceptstartride";
       body = jsonEncode({
         'rideId': this.widget.ride,
         'passengerID': id,
@@ -80,43 +70,46 @@ class _NotificationContainerState extends State<NotificationContainer> {
       });
     }
 
+    
     final response = await http.post(Uri.parse(apiUrl),
-        headers: {"Content-Type": "application/json"}, body: body);
+        headers: {"Content-Type": "application/json"},
+        body: body);
     print("starting loader");
 
     if (response.statusCode == 200) {
       Navigator.popAndPushNamed(context, NotificationsScreen.routeName);
     }
-  }
+    }
 
   Future<void> _decline(id) async {
     String apiUrl;
     var body;
-    if (this.widget.type == 'bookrequest') {
-      apiUrl = "$http_ip/api/ride/rejectbookedride";
+    if (this.widget.type == 'bookrequest'){
+      apiUrl = "https://$myip/api/ride/rejectbookedride";
+      body = jsonEncode({
+        'rideId': this.widget.ride,
+        'passengerID': id,
+        'userId': sharedprefenrenceid
+      }); 
+    }else if (this.widget.type == 'startaccepted'){
+      apiUrl = "https://$myip/api/ride/cancelnotification";
       body = jsonEncode({
         'rideId': this.widget.ride,
         'passengerID': id,
         'userId': sharedprefenrenceid
       });
-    } else if (this.widget.type == 'startaccepted') {
-      apiUrl = "$http_ip/api/ride/cancelnotification";
-      body = jsonEncode({
-        'rideId': this.widget.ride,
-        'passengerID': id,
-        'userId': sharedprefenrenceid
-      });
-    } else {
-      apiUrl = "$http_ip/api/ride/cancelstartride";
+    }else{
+      apiUrl = "https://$myip/api/ride/cancelstartride";
       body = jsonEncode({
         'rideId': this.widget.ride,
         'passengerID': id,
         'userId': sharedprefenrenceid
       });
     }
-
+    
     final response = await http.post(Uri.parse(apiUrl),
-        headers: {"Content-Type": "application/json"}, body: body);
+        headers: {"Content-Type": "application/json"},
+        body: body);
     print("starting loader");
 
     if (response.statusCode == 200) {
@@ -143,163 +136,150 @@ class _NotificationContainerState extends State<NotificationContainer> {
             EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
         margin:
             EdgeInsets.symmetric(vertical: getProportionateScreenHeight(10)),
-        child: Column(children: [
-          //SizedBox(height: getProportionateScreenHeight(20)),
-          Container(
-            decoration: BoxDecoration(
-              //color: Colors.white54,
-              gradient: kPrimaryGradientColor,
-              borderRadius: BorderRadius.all(
-                Radius.circular(20),
+        child: Column(
+          children: [
+            //SizedBox(height: getProportionateScreenHeight(20)),
+            Container(
+              decoration: BoxDecoration(
+                //color: Colors.white54,
+                gradient: kPrimaryGradientColor,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(20),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey[300],
+                    spreadRadius: 4,
+                    blurRadius: 3,
+                    offset: Offset(0, 4), // changes position of shadow
+                  ),
+                ],
               ),
-              //],
-            ),
-            // height: getProportionateScreenHeight(200),
-            // width: getProportionateScreenWidth(250),)
-            // child: Padding(
-            //   padding: EdgeInsets.symmetric(
-            //       horizontal: getProportionateScreenWidth(20),
-            //       vertical: getProportionateScreenHeight(10)),
-            //   child: Column(
-            //     children: [
-            //       Text(
-            //         "Messages",
-            //         style: TextStyle(
-            //           color: Colors.black,
-            //           fontSize: getProportionateScreenWidth(20),
-            //         ),
-            //       ),
-
-            //     ],
-            //   ),
-            // height: getProportionateScreenHeight(200),
-            width: getProportionateScreenWidth(250),
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: getProportionateScreenWidth(20),
-                  vertical: getProportionateScreenHeight(10)),
-              child: Column(
-                children: [
-                  Text(
-                    "Messages",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: getProportionateScreenWidth(20),
-                    ),
-                  ),
-                  SizedBox(
-                    height: getProportionateScreenHeight(10),
-                  ),
-                  Text(
-                    "${this.widget.message}",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: getProportionateScreenWidth(16),
-                    ),
-                  ),
-                  SizedBox(
-                    height: getProportionateScreenHeight(20),
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        "From :",
+              // height: getProportionateScreenHeight(200),
+              width: getProportionateScreenWidth(250),
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: getProportionateScreenWidth(20),
+                    vertical: getProportionateScreenHeight(10)),
+                child: Column(
+                  children: [
+                    Text(
+                        "Messages",
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: getProportionateScreenWidth(12),
+                          fontSize: getProportionateScreenWidth(20),
                         ),
                       ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          "${this.widget.pickUpLocation}",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: getProportionateScreenWidth(15),
-                          ),
+                    SizedBox(
+                      height: getProportionateScreenHeight(10),
+                    ),
+                    Text(
+                        "${this.widget.message}",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: getProportionateScreenWidth(16),
                         ),
                       ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: getProportionateScreenHeight(10),
-                  ),
-                  Row(
-                    children: [
-                      Container(
-                        child: Text(
-                          "To:     ",
+                      SizedBox(
+                        height: getProportionateScreenHeight(20),
+                      ),
+                    Row(
+                      children: [
+                        Text(
+                          "From :",
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: getProportionateScreenWidth(12),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          "${this.widget.dropLocation},",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: getProportionateScreenWidth(15),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: getProportionateScreenHeight(10),
-                  ),
-                  Row(
-                    children: [
-                      FlatButton(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50)),
-                        color: kPrimaryColor,
-                        onPressed: () {
-                          _accept(this.widget.passengerID);
-                        },
-                        child: Text(
-                          "Accept",
-                          style: TextStyle(
-                            fontSize: getProportionateScreenWidth(18),
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      Expanded(child: SizedBox()),
-                      if (this.widget.type != 'startaccepted')
-                        TextButton(
-                          style: TextButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50)),
-                            backgroundColor: kPrimaryColor,
-                          ),
-                          onPressed: () {
-                            _decline(this.widget.passengerID);
-                          },
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
                           child: Text(
-                            "Decline",
+                            "${this.widget.pickUpLocation}",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: getProportionateScreenWidth(15),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: getProportionateScreenHeight(10),
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          child: Text(
+                            "To:     ",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: getProportionateScreenWidth(12),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            "${this.widget.dropLocation},",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: getProportionateScreenWidth(15),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: getProportionateScreenHeight(10),
+                    ),
+
+                    Row(
+                      children: [
+                        FlatButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50)),
+                          color: kPrimaryColor,
+                          onPressed: (){_accept(this.widget.passengerID);},
+                          child: Text(
+                            "Accept",
                             style: TextStyle(
                               fontSize: getProportionateScreenWidth(18),
                               color: Colors.white,
                             ),
                           ),
-                        )
-                    ],
-                  ),
-                ],
+                        ),
+                        Expanded(child: SizedBox()),
+                        if (this.widget.type != 'startaccepted')
+                          TextButton(
+                            style: TextButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(50)),
+                              backgroundColor: kPrimaryColor,
+                            ),
+                            onPressed: (){_decline(this.widget.passengerID);},
+                            child: Text(
+                              "Decline",
+                              style: TextStyle(
+                                fontSize: getProportionateScreenWidth(18),
+                                color: Colors.white,
+                              ),
+                            ),
+                          )
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          // ),
-        ]),
+          ]
+        ),
       ),
     );
   }

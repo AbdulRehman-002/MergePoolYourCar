@@ -77,7 +77,7 @@ class _BodyState extends State<Body> {
       var request = http.MultipartRequest(
           'POST',
           Uri.parse(
-              '$http_ip/api/upload_profile_image/${widget.sharedprefenrenceid}'));
+              '$myip/api/upload_profile_image/${widget.sharedprefenrenceid}'));
       request.files
           .add(await http.MultipartFile.fromPath('image', pickedImage.path));
 
@@ -115,8 +115,8 @@ class _BodyState extends State<Body> {
   }
 
   Future<GetUserResponseModel> GetUserDetails() async {
-    final response = await http.get(
-        Uri.parse("$http_ip/api/getsingleuser/${widget.sharedprefenrenceid}"));
+    final response = await http.get(Uri.parse(
+        "https://$myip/api/getsingleuser/${widget.sharedprefenrenceid}"));
     if (response.statusCode == 200) {
       print("Now Getting user data in profile details screen");
       print(jsonDecode(response.body));
@@ -179,7 +179,7 @@ class _BodyState extends State<Body> {
                     // backgroundImage: !this.image_is_uploaded
                     backgroundImage: this.image_is_uploaded == true
                         ? NetworkImage(
-                            "$http_ip/images/${this.user_profile_image_url}")
+                            "https://$myip/images/${this.user_profile_image_url}")
                         : image == null
                             ? AssetImage("assets/images/Profile Image.png")
                             : FileImage(image),

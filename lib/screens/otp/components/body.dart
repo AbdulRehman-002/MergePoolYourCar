@@ -22,7 +22,7 @@ class Body extends StatelessWidget {
               ),
               Text("We sent your code to phone number"),
               buildTimer(),
-              OtpForm(),
+              // OtpForm(),
               SizedBox(height: SizeConfig.screenHeight * 0.1),
               GestureDetector(
                 onTap: () {

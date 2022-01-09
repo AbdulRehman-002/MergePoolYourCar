@@ -91,7 +91,7 @@ class _SearchedResultRidePlanState extends State<SearchedResultRidePlan> {
 
   Future<GetUserResponseModel> GetDriversDetails() async {
     final response = await http
-        .get(Uri.parse("$http_ip/api/getsingleuser/${widget.driverID}"));
+        .get(Uri.parse("https://$myip/api/getsingleuser/${widget.driverID}"));
     if (response.statusCode == 200) {
       print("Now Getting drivers data in ride plan screen");
       print(jsonDecode(response.body));
@@ -129,7 +129,8 @@ class _SearchedResultRidePlanState extends State<SearchedResultRidePlan> {
     var headers = {'Content-Type': 'application/json'};
     print("Before url");
     http.Response response = await http.get(
-        Uri.parse('$http_ip/api/ride/passengers/${widget.rideid.toString()}'),
+        Uri.parse(
+            'https://$myip/api/ride/passengers/${widget.rideid.toString()}'),
         headers: headers);
 
     List<dynamic> passengerData = json.decode(response.body)['passengers'];
@@ -173,16 +174,16 @@ class _SearchedResultRidePlanState extends State<SearchedResultRidePlan> {
   Future<void> bookRide() async {
     print("Before url");
     http.Response response = await http.post(
-        Uri.parse('$http_ip/api/ride/bookride/${widget.rideid.toString()}'),
+        Uri.parse(
+            'https://$myip/api/ride/bookride/${widget.rideid.toString()}'),
         body: json.encode({
           "userId": this.sharedprefenrenceid,
         }),
         headers: {'Content-Type': 'application/json'});
 
-    if (response.statusCode == 200 ) {
+    if (response.statusCode == 200) {
       print(response.body);
       print("In status 200");
-
       CherryToast.success(
         toastDuration: Duration(seconds: 2),
         title: "",
@@ -193,10 +194,9 @@ class _SearchedResultRidePlanState extends State<SearchedResultRidePlan> {
         animationDuration: Duration(milliseconds: 500),
         autoDismiss: true,
       ).show(context);
-        // Bookrequestbuttondisabled = !Bookrequestbuttondisabled;
-        
-      getPassengers(); 
+      // Bookrequestbuttondisabled = !Bookrequestbuttondisabled;
 
+      getPassengers();
       print('passenger updated');
     } else if (response.statusCode > 500) {
       CherryToast.error(
@@ -209,7 +209,7 @@ class _SearchedResultRidePlanState extends State<SearchedResultRidePlan> {
         animationDuration: Duration(milliseconds: 500),
         autoDismiss: true,
       ).show(context);
-    }else{
+    } else {
       CherryToast.error(
         toastDuration: Duration(seconds: 2),
         title: "",
@@ -227,7 +227,7 @@ class _SearchedResultRidePlanState extends State<SearchedResultRidePlan> {
     print("Before url");
     http.Response response = await http.post(
         Uri.parse(
-            '$http_ip/api/ride/cancelbookedride/${widget.rideid.toString()}'),
+            'https://$myip/api/ride/cancelbookedride/${widget.rideid.toString()}'),
         body: json.encode({
           "userId": this.sharedprefenrenceid,
         }),
@@ -275,7 +275,7 @@ class _SearchedResultRidePlanState extends State<SearchedResultRidePlan> {
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: kPrimaryColor),
-        title: Text("Searched Ride Plan"),
+        //title: Text("Ride Plan"),
       ),
       body: SafeArea(
         child: SizedBox(
@@ -526,9 +526,16 @@ class _SearchedResultRidePlanState extends State<SearchedResultRidePlan> {
                         ),
                         SizedBox(height: SizeConfig.screenHeight * 0.02),
                         Divider(thickness: 1.8, color: kPrimaryColor),
-                        SizedBox(height: SizeConfig.screenHeight * 0.02),
+                        //SizedBox(height: SizeConfig.screenHeight * 0.02),
                         Row(
                           children: [
+                            Text(
+                              "Driver: ",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: getProportionateScreenWidth(15),
+                                  fontWeight: FontWeight.w700),
+                            ),
                             GestureDetector(
                               onTap: () {
                                 print(widget.driverID);
@@ -552,25 +559,20 @@ class _SearchedResultRidePlanState extends State<SearchedResultRidePlan> {
                             CircleAvatar(
                               backgroundImage: this.image_is_uploaded
                                   ? NetworkImage(
-                                      "$http_ip/images/${this.driver_profile_image_url}")
+                                      "https://$myip/images/${this.driver_profile_image_url}")
                                   : AssetImage(
                                       "assets/images/Profile Image.png"),
                             ),
                           ],
                         ),
-
                         SizedBox(height: SizeConfig.screenHeight * 0.01),
-
                         SizedBox(
                           child: Text(
-                            "${this.passengers.isEmpty?"No":""} Passengers",
+                            "${this.passengers.isEmpty ? "No" : ""} Passengers Yet",
                             style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18
-                            ),
+                                fontWeight: FontWeight.bold, fontSize: 18),
                           ),
                         ),
-
                         SizedBox(height: SizeConfig.screenHeight * 0.01),
                         Column(
                           children: List.generate(passengers.length, (index) {
@@ -606,7 +608,7 @@ class _SearchedResultRidePlanState extends State<SearchedResultRidePlan> {
                                     CircleAvatar(
                                       backgroundImage: this.image_is_uploaded
                                           ? NetworkImage(
-                                              "$http_ip/images/${passengers[index].profileImageUrl}")
+                                              "https://$myip/images/${passengers[index].profileImageUrl}")
                                           : AssetImage(
                                               "assets/images/Profile Image.png"),
                                     ),
@@ -619,6 +621,14 @@ class _SearchedResultRidePlanState extends State<SearchedResultRidePlan> {
                           }),
                         ),
                         Divider(thickness: 1.8, color: kPrimaryColor),
+                        SizedBox(height: SizeConfig.screenHeight * 0.02),
+                        SizedBox(
+                          child: Text(
+                            "Note:20% of ride fare will be deducted in advance",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 13),
+                          ),
+                        ),
                         SizedBox(height: SizeConfig.screenHeight * 0.02),
                         !Bookrequestbuttondisabled
                             ? DefaultButton(text: "Book Ride", press: bookRide)

@@ -24,7 +24,7 @@ class _ChangeEmailScreenState extends State<ChangeEmailScreen> {
   Future<CheckEmailExistsResponseModel> checkEmail() async {
     var headers = {'Content-Type': 'application/json'};
     var request =
-        http.Request('GET', Uri.parse('$http_ip/api/user/checkemailexists'));
+        http.Request('GET', Uri.parse('$myip/api/user/checkemailexists'));
     request.body = json.encode({
       "email": this.emailcontroller.value.text,
     });

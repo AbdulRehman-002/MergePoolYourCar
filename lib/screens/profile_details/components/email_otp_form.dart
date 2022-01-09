@@ -75,7 +75,7 @@ class _EmailOtpFormState extends State<EmailOtpForm> {
 
     var headers = {'Content-Type': 'application/json'};
     var request =
-        http.Request('POST', Uri.parse('$http_ip/api/user/sendemailotp'));
+        http.Request('POST', Uri.parse('$myip/api/user/sendemailotp'));
     request.body = json.encode({
       "email": this.widget.email,
     });
@@ -111,7 +111,7 @@ class _EmailOtpFormState extends State<EmailOtpForm> {
     );
     var headers = {'Content-Type': 'application/json'};
     var request = http.Request('PUT',
-        Uri.parse('$http_ip/api/user/changeemail/${this.sharedprefenrenceid}'));
+        Uri.parse('$myip/api/user/changeemail/${this.sharedprefenrenceid}'));
     request.body = json.encode({"newemail": widget.email});
     request.headers.addAll(headers);
 

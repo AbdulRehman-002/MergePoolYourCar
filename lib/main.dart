@@ -27,7 +27,7 @@ class _MyAppState extends State<MyApp> {
   void connectToServer() {
     try {
       // Configure socket transports must be sepecified
-      socket = io('$http_ip', <String, dynamic>{
+      socket = io('https://$myip', <String, dynamic>{
         'transports': ['websocket'],
         'autoConnect': false,
       });

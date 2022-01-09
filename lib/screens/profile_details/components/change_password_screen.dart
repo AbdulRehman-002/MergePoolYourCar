@@ -85,7 +85,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                             updatePassword() async {
                           final response = await http.put(
                             Uri.parse(
-                                "$http_ip/api/user/updatepassword/$userid"),
+                                "https://$myip/api/user/updatepassword/$userid"),
                             headers: <String, String>{
                               'Content-Type': 'application/json; charset=UTF-8',
                             },

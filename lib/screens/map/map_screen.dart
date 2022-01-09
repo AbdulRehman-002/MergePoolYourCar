@@ -122,7 +122,7 @@ class _MapScreenState extends State<MapScreen> {
                         height: 20,
                       ),
                       Text(
-                        'Total Duration: ${_info.totalDuration}',
+                        'Total Durationn: ${_info.totalDuration}',
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 18,
@@ -300,7 +300,7 @@ class _MapScreenState extends State<MapScreen> {
   }
 
   Future<void> _startRide() async {
-    final String apiUrl = "$http_ip/api/ride/startride";
+    final String apiUrl = "https://$myip/api/ride/startride";
     var body =
         jsonEncode({'rideId': this.widget.ride, 'userId': sharedprefenrenceid});
 
@@ -350,7 +350,7 @@ class _MapScreenState extends State<MapScreen> {
   }
 
   Future<void> _endRide() async {
-    final String apiUrl = "$http_ip/api/ride/endride";
+    final String apiUrl = "https://$myip/api/ride/endride";
     var body =
         jsonEncode({'rideId': this.widget.ride, 'userId': sharedprefenrenceid});
 

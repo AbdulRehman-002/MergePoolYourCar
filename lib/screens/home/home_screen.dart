@@ -19,6 +19,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
   List<MenuState> pages = [
     MenuState.home,
     MenuState.searchride,
@@ -30,19 +31,18 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: [
+      body: [ 
         Body(),
         SearchRideScreen(),
         OfferRideScreen(),
         InboxScreen(),
         ProfileScreen(),
       ].elementAt(currentTab),
-      //body: Body(),
       bottomNavigationBar: CustomBottomNavBar(
-        selectedMenu: MenuState.home, // pages.elementAt(currentTab),
-        onSelect: (selected) {
+        selectedMenu: pages.elementAt(currentTab),
+        onSelect: (selected){
           setState(() {
-            if (isUserBlocked) {
+            if (isUserBlocked){
               Fluttertoast.showToast(
                 msg: "User Blocked Please Contact Admin",
                 toastLength: Toast.LENGTH_LONG,
@@ -51,10 +51,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 textColor: Colors.white,
                 fontSize: 20.0,
               );
+            }else{
+              currentTab = selected;
             }
-            //  else {
-            //   currentTab = selected;
-            // }
           });
         },
       ),

@@ -1,16 +1,13 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:pool_your_car/constants.dart';
 import 'package:pool_your_car/screens/help_center/help_center_screen.dart';
+import 'package:pool_your_car/screens/profile/components/admin_email.dart';
 import 'package:pool_your_car/screens/profile_details/profile_details_screen.dart';
 import 'package:pool_your_car/screens/profile_details/profile_details_screen.dart';
-import 'package:pool_your_car/screens/sign_in/sign_in_screen.dart';
 import 'package:pool_your_car/screens/splash/splash_screen.dart';
-
-import '../../../size_config.dart';
-
 import 'package:pool_your_car/screens/wallet/wallet_screen.dart';
-
+import '../../../constants.dart';
+import '../../../size_config.dart';
 import 'profile_menu.dart';
 import 'profile_pic.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -68,17 +65,15 @@ class _BodyState extends State<Body> {
             press: () => {
               //gettingSharedPreference(),
               Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ProfileDetailsScreen(
-                      sharedprefenrenceid: this.sharedprefenrenceid),
-                ),
-              )
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ProfileDetailsScreen(
+                          sharedprefenrenceid: this.sharedprefenrenceid)))
             },
           ),
           ProfileMenu(
             text: "Wallet",
-            icon: "assets/icons/Settings.svg",
+            icon: "assets/icons/Cash.svg",
             press: () => {
               Navigator.push(
                   context,
@@ -102,13 +97,8 @@ class _BodyState extends State<Body> {
             text: "Help Center",
             icon: "assets/icons/Question mark.svg",
             press: () {
-              //Navigator.pushNamed(context, HelpCenterScreen.routeName);
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => HelpCenterScreen(),
-                ),
-              );
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => HelpCenterScreen()));
             },
           ),
           ProfileMenu(

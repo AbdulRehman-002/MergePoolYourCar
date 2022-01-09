@@ -53,8 +53,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
 
   Future<ResetForgotPassword> resetPassword() async {
     var headers = {'Content-Type': 'application/json'};
-    var request = http.Request('PUT',
-        Uri.parse('$http_ip/api/user/resetforgotpassword/${widget.email}'));
+    var request = http.Request(
+        'PUT', Uri.parse('$myip/api/user/resetforgotpassword/${widget.email}'));
     request.body =
         json.encode({"password": this._newpasswordcontroller.value.text});
     request.headers.addAll(headers);

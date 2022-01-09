@@ -46,7 +46,7 @@ String userid;
 // Future<UpdateUserResponseModel> updateUser(String fn, String ln) async {
 //   if (fn != "" && ln != "") {
 //     final response = await http.put(
-//       Uri.parse("$http_ip/api/user/edituser/$userid"),
+//       Uri.parse("https://$myip/api/user/edituser/$userid"),
 //       headers: <String, String>{
 //         'Content-Type': 'application/json; charset=UTF-8',
 //       },
@@ -77,7 +77,7 @@ String userid;
 //   /////////
 //   else if (fn != "") {
 //     final response = await http.put(
-//       Uri.parse("$http_ip/api/user/edituser/$userid"),
+//       Uri.parse("https://$myip/api/user/edituser/$userid"),
 //       headers: <String, String>{
 //         'Content-Type': 'application/json; charset=UTF-8',
 //       },
@@ -104,7 +104,7 @@ String userid;
 //     }
 //   } else if (ln != "") {
 //     final response = await http.put(
-//       Uri.parse("$http_ip/api/user/edituser/$userid"),
+//       Uri.parse("https://$myip/api/user/edituser/$userid"),
 //       headers: <String, String>{
 //         'Content-Type': 'application/json; charset=UTF-8',
 //       },
@@ -292,7 +292,7 @@ class _EditProfileState extends State<EditProfile> {
                               if (fn != "" && ln != "") {
                                 final response = await http.put(
                                   Uri.parse(
-                                      "$http_ip/api/user/edituser/$userid"),
+                                      "https://$myip/api/user/edituser/$userid"),
                                   headers: <String, String>{
                                     'Content-Type':
                                         'application/json; charset=UTF-8',
@@ -343,7 +343,7 @@ class _EditProfileState extends State<EditProfile> {
                               else if (fn != "") {
                                 final response = await http.put(
                                   Uri.parse(
-                                      "$http_ip/api/user/edituser/$userid"),
+                                      "https://$myip/api/user/edituser/$userid"),
                                   headers: <String, String>{
                                     'Content-Type':
                                         'application/json; charset=UTF-8',
@@ -390,7 +390,7 @@ class _EditProfileState extends State<EditProfile> {
                               } else if (ln != "") {
                                 final response = await http.put(
                                   Uri.parse(
-                                      "$http_ip/api/user/edituser/$userid"),
+                                      "https://$myip/api/user/edituser/$userid"),
                                   headers: <String, String>{
                                     'Content-Type':
                                         'application/json; charset=UTF-8',
