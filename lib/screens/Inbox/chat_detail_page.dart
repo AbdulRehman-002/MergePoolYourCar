@@ -155,7 +155,9 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
       this.messageList = data['message'];
       // this.reverseMessageList = this.messageList.reversed;
     });
-    scrollController.jumpTo(scrollController.position.maxScrollExtent);
+    // scrollController.jumpTo(scrollController.position.maxScrollExtent);
+    scrollController.animateTo(scrollController.position.maxScrollExtent,
+        duration: Duration(milliseconds: 600), curve: Curves.ease);
   }
 
   Future<GetSingleConversationResponseModel> getConversation() async {
@@ -180,6 +182,8 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
       print("convo id is");
       print(this.convoMap['conversation']['_id']);
       print(this.messageList[0]);
+      scrollController.animateTo(scrollController.position.maxScrollExtent,
+          duration: Duration(milliseconds: 600), curve: Curves.ease);
     } else {
       print(response.reasonPhrase);
     }
@@ -209,7 +213,9 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
         this.messageList = responseMap['conversation']['message'];
         //this.reverseMessageList = this.messageList.reversed;
       });
-      scrollController.jumpTo(scrollController.position.maxScrollExtent);
+      // scrollController.jumpTo(scrollController.position.maxScrollExtent);
+      scrollController.animateTo(scrollController.position.maxScrollExtent,
+          duration: Duration(milliseconds: 600), curve: Curves.ease);
     } else {
       print(response.reasonPhrase);
     }
@@ -354,7 +360,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                         //reverse: true,
                         shrinkWrap: true,
                         padding: EdgeInsets.only(top: 10, bottom: 10),
-                        physics: NeverScrollableScrollPhysics(),
+                        // physics: NeverScrollableScrollPhysics(),
                         itemBuilder: (context, index) {
                           return Container(
                             padding: EdgeInsets.only(
@@ -458,6 +464,11 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                       // await sendMessageToExistingConvo(
                       //   _messageController.text,
                       // );
+                      scrollController.animateTo(
+                        scrollController.position.maxScrollExtent,
+                        duration: Duration(milliseconds: 600),
+                        curve: Curves.ease,
+                      );
                     },
                     child: Icon(
                       Icons.send,

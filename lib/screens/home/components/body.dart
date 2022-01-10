@@ -148,11 +148,12 @@ class _BodyState extends State<Body> {
   Future<GetUserPastOfferedRidesResponseModel> getUserPastOfferedRides() async {
     //await gettingSharedPreference();
     final response = await http.get(Uri.parse(
-        "https://$myip/api/ride/requestnotifications/${this.sharedprefenrenceid}"));
+        "https://$myip/api/ride/getallpastofferedridesofuser/${this.sharedprefenrenceid}"));
     if (response.statusCode == 200) {
       //var _user = json.decode(response.body);
       Map<String, dynamic> responseJson = json.decode(response.body);
-
+      print("printing now respone");
+      print(response.body);
       setState(() {
         this.pastofferedRideList = responseJson['pastofferedride'];
         print(responseJson['pastofferedride']);
@@ -206,6 +207,13 @@ class _BodyState extends State<Body> {
     await getUserPastOfferedRides();
     await getUserBookedRides();
     isListNotEmpty(this.pastofferedRideList);
+    _refreshController.refreshCompleted();
+  }
+  void _onRefresh() async {
+    // monitor network fetch
+    await Future.delayed(Duration(milliseconds: 1000));
+    // if failed,use refreshFailed()
+    _refreshController.refreshCompleted();
   }
 
   @override
