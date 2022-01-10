@@ -29,7 +29,7 @@ class _BodyState extends State<Body> {
     var request = http.Request(
         'POST',
         Uri.parse(
-            '$myip/api/user/checkemailexistsandsendotp/${_emailController.value.text}'));
+            'https://$myip/api/user/checkemailexistsandsendotp/${_emailController.value.text}'));
 
     http.StreamedResponse response = await request.send();
 

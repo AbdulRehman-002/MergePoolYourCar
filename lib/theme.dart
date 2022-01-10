@@ -40,6 +40,8 @@ TextTheme textTheme() {
 
 AppBarTheme appBarTheme() {
   return AppBarTheme(
+    titleTextStyle: TextStyle(
+        color: kPrimaryColor, fontWeight: FontWeight.w500, fontSize: 18),
     color: Colors.white,
     elevation: 0,
     brightness: Brightness.light,

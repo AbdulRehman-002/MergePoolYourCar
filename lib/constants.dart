@@ -4,7 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:pool_your_car/size_config.dart';
 
 const googleApiKey = 'AIzaSyCsh2LKtmVlhmQVDF-1jp3Ci6jWG_vUMzw';
-const myip = "poolyourcar.herokuapp.com";
+// const myip = "192.168.43.218";
+// const http_ip = "http://$myip:3000"; //mine http for running locally in pc
+
+const myip = "poolyourcarfypbackend.herokuapp.com"; //ar internet ip
+//const myip = "https://$herokuip"; //my
+
+//const myip = "poolyourcar.herokuapp.com";
 bool isUserBlocked = false;
 const kPrimaryColor = Color(0xFFFF7643);
 const kPrimaryLightColor = Color(0xFFFFECDF);

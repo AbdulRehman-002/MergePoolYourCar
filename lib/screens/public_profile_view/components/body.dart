@@ -57,7 +57,7 @@ class _BodyState extends State<Body> {
       String firstUserId, String secondUserId, String message) async {
     var headers = {'Content-Type': 'application/json'};
     var request = http.Request(
-        'POST', Uri.parse('$myip/api/conversation/createconversation'));
+        'POST', Uri.parse('https://$myip/api/conversation/createconversation'));
     request.body = json.encode({
       "firstUserId": firstUserId,
       "secondUserId": secondUserId,
@@ -87,7 +87,7 @@ class _BodyState extends State<Body> {
     print('second user id ' + widget.userid);
     var res;
     String url =
-        '$myip/api/conversation/searchconversationexists/${this.sharedprefenrenceid}/${widget.userid}';
+        'https://$myip/api/conversation/searchconversationexists/${this.sharedprefenrenceid}/${widget.userid}';
     var request = http.Request('GET', Uri.parse(url));
 
     http.StreamedResponse response = await request.send();

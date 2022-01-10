@@ -54,7 +54,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   Future<ResetForgotPassword> resetPassword() async {
     var headers = {'Content-Type': 'application/json'};
     var request = http.Request(
-        'PUT', Uri.parse('$myip/api/user/resetforgotpassword/${widget.email}'));
+        'PUT',
+        Uri.parse(
+            'https://$myip/api/user/resetforgotpassword/${widget.email}'));
     request.body =
         json.encode({"password": this._newpasswordcontroller.value.text});
     request.headers.addAll(headers);
@@ -95,7 +97,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 SizedBox(height: getProportionateScreenHeight(40)),
                 DefaultButton(
                   text: "Save",
-                  press: () {
+                  press: () async {
                     if (_formKey.currentState.validate()) {
                       //Navigator.pushNamed(context, OtpScreen.routeName);
                       print("Alright");
@@ -103,7 +105,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                       // print(new_password);
                       // print(confirm_new_password);
                       print(_newpasswordcontroller.value.text);
-                      resetPassword();
+                      await resetPassword();
                     }
                   },
                 ),

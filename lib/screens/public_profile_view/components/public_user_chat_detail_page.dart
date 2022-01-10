@@ -44,7 +44,7 @@ class _PublicUserChatDetailPageState extends State<PublicUserChatDetailPage> {
   //     String firstUserId, String secondUserId, String message) async {
   //   var headers = {'Content-Type': 'application/json'};
   //   var request = http.Request(
-  //       'POST', Uri.parse('$myip/api/conversation/createconversation'));
+  //       'POST', Uri.parse('https://$myip/api/conversation/createconversation'));
   //   request.body = json.encode({
   //     "firstUserId": firstUserId,
   //     "secondUserId": secondUserId,
@@ -73,7 +73,7 @@ class _PublicUserChatDetailPageState extends State<PublicUserChatDetailPage> {
     var request = http.Request(
         'PUT',
         Uri.parse(
-            '$myip/api/conversation/appendmessageinconversation/${widget.conversationMap['_id']}'));
+            'https://$myip/api/conversation/appendmessageinconversation/${widget.conversationMap['_id']}'));
     request.body = json.encode({
       "senderId": this.myid,
       "text": message,
@@ -103,7 +103,7 @@ class _PublicUserChatDetailPageState extends State<PublicUserChatDetailPage> {
     try {
       // Configure socket transports must be sepecified
       socket = io(
-          '$myip',
+          'https://$myip',
           OptionBuilder()
               .setTransports(['websocket'])
               .enableForceNewConnection()

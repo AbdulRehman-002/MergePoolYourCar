@@ -52,7 +52,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
   //     String firstUserId, String secondUserId, String message) async {
   //   var headers = {'Content-Type': 'application/json'};
   //   var request = http.Request(
-  //       'POST', Uri.parse('$myip/api/conversation/createconversation'));
+  //       'POST', Uri.parse('https://$myip/api/conversation/createconversation'));
   //   request.body = json.encode({
   //     "firstUserId": firstUserId,
   //     "secondUserId": secondUserId,
@@ -81,7 +81,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
     try {
       // Configure socket transports must be sepecified
       socket = io(
-          '$myip',
+          'https://$myip',
           OptionBuilder()
               .setTransports(['websocket'])
               .enableForceNewConnection()
@@ -162,7 +162,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
     var request = http.Request(
         'GET',
         Uri.parse(
-            '$myip/api/conversation/getsingleconversation/${widget.conversationId}'));
+            'https://$myip/api/conversation/getsingleconversation/${widget.conversationId}'));
 
     http.StreamedResponse response = await request.send();
 
@@ -191,7 +191,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
     var request = http.Request(
         'PUT',
         Uri.parse(
-            '$myip/api/conversation/appendmessageinconversation/${widget.conversationId}'));
+            'https://$myip/api/conversation/appendmessageinconversation/${widget.conversationId}'));
     request.body = json.encode({
       "senderId": this.myid,
       "text": message,

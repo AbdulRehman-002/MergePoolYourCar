@@ -77,7 +77,7 @@ class _BodyState extends State<Body> {
       var request = http.MultipartRequest(
           'POST',
           Uri.parse(
-              '$myip/api/upload_profile_image/${widget.sharedprefenrenceid}'));
+              'https://$myip/api/upload_profile_image/${widget.sharedprefenrenceid}'));
       request.files
           .add(await http.MultipartFile.fromPath('image', pickedImage.path));
 

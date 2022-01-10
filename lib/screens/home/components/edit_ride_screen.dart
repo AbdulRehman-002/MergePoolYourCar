@@ -73,8 +73,10 @@ class _EditRideScreenState extends State<EditRideScreen> {
   }
 
   Future<GetSingleRideResponseModel> getRideDetails() async {
-    var request = http.Request('GET',
-        Uri.parse('$myip/api/ride/getsingleofferedride/${widget.rideid}'));
+    var request = http.Request(
+        'GET',
+        Uri.parse(
+            'https://$myip/api/ride/getsingleofferedride/${widget.rideid}'));
 
     http.StreamedResponse response = await request.send();
 

@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:pool_your_car/screens/%20notifications/notification_screen.dart';
+import 'package:pool_your_car/screens/notifications/notification_screen.dart';
 import 'package:pool_your_car/screens/cart/cart_screen.dart';
 import 'package:pool_your_car/screens/complete_profile/complete_profile_screen.dart';
 import 'package:pool_your_car/screens/details/details_screen.dart';

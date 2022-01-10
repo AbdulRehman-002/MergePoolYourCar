@@ -32,6 +32,7 @@ class _SignFormState extends State<SignForm> {
   String email;
   String password;
   bool remember = false;
+  bool showPassword = false;
   final List<String> errors = [];
   @override
   void initState() {
@@ -80,8 +81,10 @@ class _SignFormState extends State<SignForm> {
     final SharedPreferences emailprefs = await preferences;
     var _res = prefs.getString("user");
     String _email = emailprefs.getString("email");
-    print("id in shared preference is " + json.decode(_res));
-    print("email in shared preference is " + json.decode(_email));
+    if (_res != null && _email != null) {
+      print("id in shared preference is " + json.decode(_res));
+      print("email in shared preference is " + json.decode(_email));
+    }
   }
 
   @override
@@ -96,23 +99,24 @@ class _SignFormState extends State<SignForm> {
             buildPasswordFormField(),
             SizedBox(height: getProportionateScreenHeight(30)),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Checkbox(
-                  value: remember,
-                  activeColor: kPrimaryColor,
-                  onChanged: (value) {
-                    setState(() {
-                      remember = value;
-                    });
-                  },
-                ),
-                Text(
-                  "Remember me",
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
-                ),
-                Spacer(),
+                // Checkbox(
+                //   value: remember,
+                //   activeColor: kPrimaryColor,
+                //   onChanged: (value) {
+                //     setState(() {
+                //       remember = value;
+                //     });
+                //   },
+                // ),
+                // Text(
+                //   "Remember me",
+                //   style: TextStyle(
+                //     fontSize: 16,
+                //   ),
+                // ),
+                // Spacer(),
                 GestureDetector(
                   onTap: () => Navigator.pushNamed(
                     context,
@@ -139,18 +143,21 @@ class _SignFormState extends State<SignForm> {
                   final String password = _passwordcontroller.text;
 
                   KeyboardUtil.hideKeyboard(context);
-                  Loader.show(context,
-                      isAppbarOverlay: true,
-                      isBottomBarOverlay: true,
-                      progressIndicator: CircularProgressIndicator(
-                        backgroundColor: kPrimaryColor,
-                      ),
-                      themeData:
-                          Theme.of(context).copyWith(accentColor: Colors.green),
-                      overlayColor: Color(0x99E8EAF6));
-                  await Future.delayed(Duration(seconds: 3), () {
-                    Loader.hide();
-                  });
+                  Loader.show(
+                    context,
+                    isAppbarOverlay: true,
+                    isBottomBarOverlay: true,
+                    progressIndicator: CircularProgressIndicator(
+                      // backgroundColor: kPrimaryColor,
+                      color: kPrimaryColor,
+                    ),
+                    themeData:
+                        Theme.of(context).copyWith(accentColor: Colors.green),
+                    overlayColor: Color(0x99E8EAF6),
+                  );
+                  // await Future.delayed(Duration(seconds: 3), () {
+                  //   Loader.hide();
+                  // });
 
                   // ignore: missing_return
                   Future<SiginResponseModel> login(
@@ -166,13 +173,13 @@ class _SignFormState extends State<SignForm> {
                         headers: {"Content-Type": "application/json"},
                         body: body);
                     print("starting loader");
-
+                    Loader.hide();
                     if (response.statusCode == 200) {
                       setState(() {
                         check = true;
                       });
 
-                      if (json.decode(response.body)['blocked'] == 'blocked'){
+                      if (json.decode(response.body)['blocked'] == 'blocked') {
                         isUserBlocked = true;
                       }
 
@@ -309,7 +316,7 @@ class _SignFormState extends State<SignForm> {
   TextFormField buildPasswordFormField() {
     return TextFormField(
       controller: _passwordcontroller,
-      obscureText: true,
+      obscureText: !showPassword,
       onSaved: (newValue) => password = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
@@ -340,7 +347,13 @@ class _SignFormState extends State<SignForm> {
           fontSize: 18,
         ),
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
+        suffixIcon: GestureDetector(
+            onTap: () {
+              setState(() {
+                this.showPassword = !this.showPassword;
+              });
+            },
+            child: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg")),
       ),
     );
   }

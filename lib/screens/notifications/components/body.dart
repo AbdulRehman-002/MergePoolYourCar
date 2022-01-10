@@ -3,10 +3,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:pool_your_car/constants.dart';
-import 'package:pool_your_car/screens/%20notifications/components/notification_container.dart';
+import 'package:pool_your_car/screens/notifications/components/notification_container.dart';
 import 'package:pool_your_car/size_config.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-    
+
 class Body extends StatefulWidget {
   const Body({Key key}) : super(key: key);
 
@@ -15,8 +15,6 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-
-
   String sharedprefenrenceid;
   List notifications;
   bool isNotificationEmpty = true;
@@ -79,8 +77,7 @@ class _BodyState extends State<Body> {
           children: [
             Expanded(
               child: Container(
-                child: 
-                  !isNotificationEmpty
+                child: !isNotificationEmpty
                     ? ListView.builder(
                         itemCount: this.notifications.length,
                         itemBuilder: (BuildContext context, int index) {
@@ -94,8 +91,7 @@ class _BodyState extends State<Body> {
                             read: this.notifications[index]['read'],
                           );
                         })
-                    : 
-                    Center(
+                    : Center(
                         child: Text(
                           "No Notifications to show",
                           style: TextStyle(
