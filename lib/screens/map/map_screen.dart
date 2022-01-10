@@ -18,9 +18,15 @@ import 'package:pool_your_car/models/Steps.dart';
 import 'components/direction_repo.dart';
 
 class MapScreen extends StatefulWidget {
-  const MapScreen({this.info, Key key, this.ride}) : super(key: key);
+  const MapScreen({
+    this.info,
+    Key key,
+    this.ride,
+    this.passengers,
+  }) : super(key: key);
   final Directions info;
   final String ride;
+  final List passengers;
 
   @override
   _MapScreenState createState() => _MapScreenState();
@@ -373,10 +379,14 @@ class _MapScreenState extends State<MapScreen> {
           fontSize: 20.0,
         );
         Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    FinalScreen(fare: data['deleteRide']['ridefare'] as int)));
+          context,
+          MaterialPageRoute(
+            builder: (context) => FinalScreen(
+              fare: data['deleteRide']['ridefare'] as int,
+              passengers: widget.passengers,
+            ),
+          ),
+        );
       } else {
         Fluttertoast.showToast(
           msg: data['message'],

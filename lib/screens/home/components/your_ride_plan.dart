@@ -249,6 +249,7 @@ class _RidePlanState extends State<RidePlan> {
               builder: (context) => MapScreen(
                     info: directions,
                     ride: this.widget.rideid,
+                    passengers: this.passengers,
                   )));
     } catch (err) {
       print(err);
@@ -271,7 +272,7 @@ class _RidePlanState extends State<RidePlan> {
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: kPrimaryColor),
-        //title: Text("Ride Plan"),
+        title: Text("Ride Plan"),
       ),
       body: SafeArea(
         child: SizedBox(
