@@ -32,7 +32,7 @@ class _BodyState extends State<Body> {
     //await gettingSharedPreference();
     print("getting notifications");
     final response = await http.get(Uri.parse(
-        "https://$myip/api/ride/getallpastofferedridesofuser/${this.sharedprefenrenceid}"));
+        "$myip/api/ride/getallpastofferedridesofuser/${this.sharedprefenrenceid}"));
     if (response.statusCode == 200) {
       Map<String, dynamic> responseJson = json.decode(response.body);
       setState(() {

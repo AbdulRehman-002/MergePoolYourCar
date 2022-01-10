@@ -300,7 +300,7 @@ class _MapScreenState extends State<MapScreen> {
   }
 
   Future<void> _startRide() async {
-    final String apiUrl = "https://$myip/api/ride/startride";
+    final String apiUrl = "$myip/api/ride/startride";
     var body =
         jsonEncode({'rideId': this.widget.ride, 'userId': sharedprefenrenceid});
 
@@ -350,7 +350,7 @@ class _MapScreenState extends State<MapScreen> {
   }
 
   Future<void> _endRide() async {
-    final String apiUrl = "https://$myip/api/ride/endride";
+    final String apiUrl = "$myip/api/ride/endride";
     var body =
         jsonEncode({'rideId': this.widget.ride, 'userId': sharedprefenrenceid});
 

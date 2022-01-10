@@ -92,7 +92,7 @@ class _RidePlanState extends State<RidePlan> {
     var request = http.Request(
         'DELETE',
         Uri.parse(
-            'https://$myip/api/ride/deleteofferedride/${widget.rideid.toString()}'));
+            '$myip/api/ride/deleteofferedride/${widget.rideid.toString()}'));
     request.body = json.encode({
       "userId": this.sharedprefenrenceid,
     });
@@ -143,7 +143,7 @@ class _RidePlanState extends State<RidePlan> {
     print("Before url");
     http.Response response = await http.post(
         Uri.parse(
-            'https://$myip/api/ride/cancelbookedride/${widget.rideid.toString()}'),
+            '$myip/api/ride/cancelbookedride/${widget.rideid.toString()}'),
         body: json.encode({
           "userId": this.sharedprefenrenceid,
         }),
@@ -198,8 +198,7 @@ class _RidePlanState extends State<RidePlan> {
     var headers = {'Content-Type': 'application/json'};
     print("Before url");
     http.Response response = await http.get(
-        Uri.parse(
-            'https://$myip/api/ride/passengers/${widget.rideid.toString()}'),
+        Uri.parse('$myip/api/ride/passengers/${widget.rideid.toString()}'),
         headers: headers);
 
     List<dynamic> passengerData = json.decode(response.body)['passengers'];
@@ -620,7 +619,7 @@ class _RidePlanState extends State<RidePlan> {
                               CircleAvatar(
                                 backgroundImage: this.image_is_uploaded
                                     ? NetworkImage(
-                                        "https://$myip/images/${passengers[index].profileImageUrl}")
+                                        "$myip/images/${passengers[index].profileImageUrl}")
                                     : AssetImage(
                                         "assets/images/Profile Image.png"),
                               ),

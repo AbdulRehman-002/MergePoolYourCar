@@ -59,7 +59,7 @@ class _ChangePhoneNumberScreenState extends State<ChangePhoneNumberScreen> {
     );
     var headers = {'Content-Type': 'application/json'};
     var request = http.Request(
-        'PUT', Uri.parse('https://$myip/api/user/resetphonenumber/$userid'));
+        'PUT', Uri.parse('$myip/api/user/resetphonenumber/$userid'));
     request.body = json.encode({
       "phonenumber": newphonenumber,
     });

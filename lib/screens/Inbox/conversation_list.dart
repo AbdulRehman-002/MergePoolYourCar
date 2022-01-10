@@ -75,7 +75,7 @@ class _ConversationListState extends State<ConversationList> {
                                   .otherUserMap['profile_image_url'] !=
                               null
                           ? NetworkImage(
-                              "https://$myip/images/${widget.otherUserMap['profile_image_url']}")
+                              "$myip/images/${widget.otherUserMap['profile_image_url']}")
                           : AssetImage("assets/images/Profile Image.png"),
                     ),
                   ),

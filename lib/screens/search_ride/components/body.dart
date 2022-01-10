@@ -214,7 +214,7 @@ class _BodyState extends State<Body> {
                           isAppbarOverlay: true,
                           isBottomBarOverlay: true,
                           progressIndicator: CircularProgressIndicator(
-                            backgroundColor: kPrimaryColor,
+                            color: kPrimaryColor,
                           ),
                           themeData: Theme.of(context)
                               .copyWith(accentColor: Colors.green),
@@ -461,7 +461,12 @@ class _BodyState extends State<Body> {
       showSelectedItems: true,
       //maxHeight: 70,
       //searchBoxDecoration: ,
-      items: ["Mini Car", "Standard Car", "Premium Car"],
+      items: [
+        "Mini Car",
+        "Sedan Car",
+        "Hatchback Car",
+        "Premium Car",
+      ],
       //label: "Menu mode *",
       showClearButton: true,
       onChanged: (value) {

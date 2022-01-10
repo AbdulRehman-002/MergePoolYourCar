@@ -127,7 +127,7 @@ class _RemainingBodySecondState extends State<RemainingBodySecond> {
         themeData: Theme.of(context).copyWith(accentColor: Colors.green),
         overlayColor: Color(0x99E8EAF6));
 
-    final String apiUrl = "https://$myip/api/ride/add";
+    final String apiUrl = "$myip/api/ride/add";
     var body = jsonEncode({
       "pickuplocation": pickuplocation,
       "pickuplocation_Lat": pickuplocationLat,

@@ -90,8 +90,8 @@ class _SearchedResultRidePlanState extends State<SearchedResultRidePlan> {
   }
 
   Future<GetUserResponseModel> GetDriversDetails() async {
-    final response = await http
-        .get(Uri.parse("https://$myip/api/getsingleuser/${widget.driverID}"));
+    final response =
+        await http.get(Uri.parse("$myip/api/getsingleuser/${widget.driverID}"));
     if (response.statusCode == 200) {
       print("Now Getting drivers data in ride plan screen");
       print(jsonDecode(response.body));
@@ -129,8 +129,7 @@ class _SearchedResultRidePlanState extends State<SearchedResultRidePlan> {
     var headers = {'Content-Type': 'application/json'};
     print("Before url");
     http.Response response = await http.get(
-        Uri.parse(
-            'https://$myip/api/ride/passengers/${widget.rideid.toString()}'),
+        Uri.parse('$myip/api/ride/passengers/${widget.rideid.toString()}'),
         headers: headers);
 
     List<dynamic> passengerData = json.decode(response.body)['passengers'];
@@ -173,13 +172,12 @@ class _SearchedResultRidePlanState extends State<SearchedResultRidePlan> {
 
   Future<void> bookRide() async {
     print("Before url");
-    http.Response response = await http.post(
-        Uri.parse(
-            'https://$myip/api/ride/bookride/${widget.rideid.toString()}'),
-        body: json.encode({
-          "userId": this.sharedprefenrenceid,
-        }),
-        headers: {'Content-Type': 'application/json'});
+    http.Response response = await http
+        .post(Uri.parse('$myip/api/ride/bookride/${widget.rideid.toString()}'),
+            body: json.encode({
+              "userId": this.sharedprefenrenceid,
+            }),
+            headers: {'Content-Type': 'application/json'});
 
     if (response.statusCode == 200) {
       print(response.body);
@@ -227,7 +225,7 @@ class _SearchedResultRidePlanState extends State<SearchedResultRidePlan> {
     print("Before url");
     http.Response response = await http.post(
         Uri.parse(
-            'https://$myip/api/ride/cancelbookedride/${widget.rideid.toString()}'),
+            '$myip/api/ride/cancelbookedride/${widget.rideid.toString()}'),
         body: json.encode({
           "userId": this.sharedprefenrenceid,
         }),
@@ -275,7 +273,7 @@ class _SearchedResultRidePlanState extends State<SearchedResultRidePlan> {
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: kPrimaryColor),
-        //title: Text("Ride Plan"),
+        title: Text("Ride Plan"),
       ),
       body: SafeArea(
         child: SizedBox(
@@ -559,7 +557,7 @@ class _SearchedResultRidePlanState extends State<SearchedResultRidePlan> {
                             CircleAvatar(
                               backgroundImage: this.image_is_uploaded
                                   ? NetworkImage(
-                                      "https://$myip/images/${this.driver_profile_image_url}")
+                                      "$myip/images/${this.driver_profile_image_url}")
                                   : AssetImage(
                                       "assets/images/Profile Image.png"),
                             ),
@@ -608,7 +606,7 @@ class _SearchedResultRidePlanState extends State<SearchedResultRidePlan> {
                                     CircleAvatar(
                                       backgroundImage: this.image_is_uploaded
                                           ? NetworkImage(
-                                              "https://$myip/images/${passengers[index].profileImageUrl}")
+                                              "$myip/images/${passengers[index].profileImageUrl}")
                                           : AssetImage(
                                               "assets/images/Profile Image.png"),
                                     ),

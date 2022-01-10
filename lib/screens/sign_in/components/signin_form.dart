@@ -164,7 +164,7 @@ class _SignFormState extends State<SignForm> {
                       String email, String password) async {
                     // print(email);
                     // print(password);
-                    final String apiUrl = "https://$myip/api/user/login";
+                    final String apiUrl = "$myip/api/user/login";
                     var body = jsonEncode({
                       "email": email,
                       "password": password,

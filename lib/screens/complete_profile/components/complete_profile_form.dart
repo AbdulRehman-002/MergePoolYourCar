@@ -146,7 +146,7 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
                     String password,
                     String confirmpassword) async {
                   print(email);
-                  final String apiUrl = "https://$myip/api/user/add";
+                  final String apiUrl = "$myip/api/user/add";
                   var body = jsonEncode({
                     "firstname": firstname,
                     "lastname": lastname,

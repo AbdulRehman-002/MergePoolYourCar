@@ -58,21 +58,21 @@ class _NotificationContainerState extends State<NotificationContainer> {
     var body;
 
     if (this.widget.type == 'bookrequest') {
-      apiUrl = "https://$myip/api/ride/acceptbookedride";
+      apiUrl = "$myip/api/ride/acceptbookedride";
       body = jsonEncode({
         'rideId': this.widget.ride,
         'passengerID': id,
         'userId': sharedprefenrenceid
       });
     } else if (this.widget.type == 'startaccepted') {
-      apiUrl = "https://$myip/api/ride/cancelnotification";
+      apiUrl = "$myip/api/ride/cancelnotification";
       body = jsonEncode({
         'rideId': this.widget.ride,
         'passengerID': id,
         'userId': sharedprefenrenceid
       });
     } else {
-      apiUrl = "https://$myip/api/ride/acceptstartride";
+      apiUrl = "$myip/api/ride/acceptstartride";
       body = jsonEncode({
         'rideId': this.widget.ride,
         'passengerID': id,
@@ -93,21 +93,21 @@ class _NotificationContainerState extends State<NotificationContainer> {
     String apiUrl;
     var body;
     if (this.widget.type == 'bookrequest') {
-      apiUrl = "https://$myip/api/ride/rejectbookedride";
+      apiUrl = "$myip/api/ride/rejectbookedride";
       body = jsonEncode({
         'rideId': this.widget.ride,
         'passengerID': id,
         'userId': sharedprefenrenceid
       });
     } else if (this.widget.type == 'startaccepted') {
-      apiUrl = "https://$myip/api/ride/cancelnotification";
+      apiUrl = "$myip/api/ride/cancelnotification";
       body = jsonEncode({
         'rideId': this.widget.ride,
         'passengerID': id,
         'userId': sharedprefenrenceid
       });
     } else {
-      apiUrl = "https://$myip/api/ride/cancelstartride";
+      apiUrl = "$myip/api/ride/cancelstartride";
       body = jsonEncode({
         'rideId': this.widget.ride,
         'passengerID': id,

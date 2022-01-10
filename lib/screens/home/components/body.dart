@@ -65,7 +65,7 @@ class _BodyState extends State<Body> {
   Future<GetUserOfferedRidesResponseModel> getUserOfferedRides() async {
     //await gettingSharedPreference();
     final response = await http.get(Uri.parse(
-        "https://$myip/api/ride/getallofferedridesofuser/${this.sharedprefenrenceid}"));
+        "$myip/api/ride/getallofferedridesofuser/${this.sharedprefenrenceid}"));
     if (response.statusCode == 200) {
       var _user = json.decode(response.body);
       Map<String, dynamic> responseJson = json.decode(response.body);
@@ -94,7 +94,7 @@ class _BodyState extends State<Body> {
         Future<GetUserOfferedRidesResponseModel> getUserOfferedRides() async {
           //await gettingSharedPreference();
           final response = await http.get(Uri.parse(
-              "https://$myip/api/ride/getallofferedridesofuser/${this.sharedprefenrenceid}"));
+              "$myip/api/ride/getallofferedridesofuser/${this.sharedprefenrenceid}"));
           if (response.statusCode == 200) {
             var _user = json.decode(response.body);
             Map<String, dynamic> responseJson = json.decode(response.body);
@@ -148,7 +148,7 @@ class _BodyState extends State<Body> {
   Future<GetUserPastOfferedRidesResponseModel> getUserPastOfferedRides() async {
     //await gettingSharedPreference();
     final response = await http.get(Uri.parse(
-        "https://$myip/api/ride/getallpastofferedridesofuser/${this.sharedprefenrenceid}"));
+        "$myip/api/ride/getallpastofferedridesofuser/${this.sharedprefenrenceid}"));
     if (response.statusCode == 200) {
       //var _user = json.decode(response.body);
       Map<String, dynamic> responseJson = json.decode(response.body);
@@ -177,7 +177,7 @@ class _BodyState extends State<Body> {
   Future<void> getUserBookedRides() async {
     //await gettingSharedPreference();
     final response = await http.get(Uri.parse(
-        "https://$myip/api/ride/getallbookedridesofuser/${this.sharedprefenrenceid}"));
+        "$myip/api/ride/getallbookedridesofuser/${this.sharedprefenrenceid}"));
     if (response.statusCode == 200) {
       var _user = json.decode(response.body);
       Map<String, dynamic> responseJson = json.decode(response.body);
@@ -209,6 +209,7 @@ class _BodyState extends State<Body> {
     isListNotEmpty(this.pastofferedRideList);
     _refreshController.refreshCompleted();
   }
+
   void _onRefresh() async {
     // monitor network fetch
     await Future.delayed(Duration(milliseconds: 1000));

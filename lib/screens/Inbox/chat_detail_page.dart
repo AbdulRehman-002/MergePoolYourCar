@@ -52,7 +52,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
   //     String firstUserId, String secondUserId, String message) async {
   //   var headers = {'Content-Type': 'application/json'};
   //   var request = http.Request(
-  //       'POST', Uri.parse('https://$myip/api/conversation/createconversation'));
+  //       'POST', Uri.parse('$myip/api/conversation/createconversation'));
   //   request.body = json.encode({
   //     "firstUserId": firstUserId,
   //     "secondUserId": secondUserId,
@@ -81,7 +81,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
     try {
       // Configure socket transports must be sepecified
       socket = io(
-          'https://$myip',
+          '$myip',
           OptionBuilder()
               .setTransports(['websocket'])
               .enableForceNewConnection()
@@ -164,7 +164,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
     var request = http.Request(
         'GET',
         Uri.parse(
-            'https://$myip/api/conversation/getsingleconversation/${widget.conversationId}'));
+            '$myip/api/conversation/getsingleconversation/${widget.conversationId}'));
 
     http.StreamedResponse response = await request.send();
 
@@ -195,7 +195,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
     var request = http.Request(
         'PUT',
         Uri.parse(
-            'https://$myip/api/conversation/appendmessageinconversation/${widget.conversationId}'));
+            '$myip/api/conversation/appendmessageinconversation/${widget.conversationId}'));
     request.body = json.encode({
       "senderId": this.myid,
       "text": message,
@@ -284,7 +284,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                                 .seconduserMap['profile_image_url'] !=
                             null
                         ? NetworkImage(
-                            "https://$myip/images/${widget.seconduserMap['profile_image_url']}")
+                            "$myip/images/${widget.seconduserMap['profile_image_url']}")
                         : AssetImage("assets/images/Profile Image.png"),
                   ),
                 ),

@@ -74,8 +74,8 @@ class _BodyState extends State<Body> {
   var users = new List<GetOverallOfferedRidesResponseModel>();
   // ignore: missing_return
   Future<GetOverallOfferedRidesResponseModel> fetchOverallOfferedRides() async {
-    final response = await http
-        .get(Uri.parse('https://$myip/api/ride/getoverallofferedrides'));
+    final response =
+        await http.get(Uri.parse('$myip/api/ride/getoverallofferedrides'));
     list = json.decode(response.body);
 
     if (response.statusCode == 200) {

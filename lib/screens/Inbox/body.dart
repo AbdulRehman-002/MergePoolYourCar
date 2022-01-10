@@ -50,8 +50,7 @@ class _BodyState extends State<Body> {
     });
     print('my id is' + myid);
 
-    String url =
-        'https://$myip/api/conversation/getusersallconversations/$userid';
+    String url = '$myip/api/conversation/getusersallconversations/$userid';
     var request = http.Request('GET', Uri.parse(url));
 
     http.StreamedResponse response = await request.send();

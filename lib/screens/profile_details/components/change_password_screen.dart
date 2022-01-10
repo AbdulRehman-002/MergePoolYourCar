@@ -84,8 +84,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                             // ignore: missing_return
                             updatePassword() async {
                           final response = await http.put(
-                            Uri.parse(
-                                "https://$myip/api/user/updatepassword/$userid"),
+                            Uri.parse("$myip/api/user/updatepassword/$userid"),
                             headers: <String, String>{
                               'Content-Type': 'application/json; charset=UTF-8',
                             },
@@ -100,7 +99,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                             isAppbarOverlay: true,
                             isBottomBarOverlay: true,
                             progressIndicator: CircularProgressIndicator(
-                              backgroundColor: kPrimaryColor,
+                              color: kPrimaryColor,
                             ),
                             themeData: Theme.of(context)
                                 .copyWith(accentColor: Colors.green),
